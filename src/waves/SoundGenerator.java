@@ -10,7 +10,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
 public class SoundGenerator {
-	public static void generate(Wave wave) throws IOException {
+	public static void generate(Wave wave, String fileName) throws IOException {
 		final double sampleRate = 44100.0;
 		final double frequency = wave.getFreq();
 		final double amplitude = wave.getAmp();
@@ -35,7 +35,7 @@ public class SoundGenerator {
 		}
 		
 
-        File out = new File("sound.wav");
+        File out = new File(fileName + ".wav");
 
         final boolean bigEndian = false;
         final boolean signed = true;
