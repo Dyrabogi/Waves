@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Label;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,15 +17,7 @@ public class Main {
 
 
 		JPanel labels = new JPanel();
-		List<String> wavesConfig = ConfigLoader.readConfig();
-		ArrayList<Wave> waves = new ArrayList<Wave>();
-		wavesConfig.forEach((line) -> {
-			String[] params = line.split(",");
-			waves.add(new Wave(Double.parseDouble(params[0]), Double.parseDouble(params[1]),
-					Double.parseDouble(params[2])));
-
-		});
-
+		ArrayList<Wave> waves = ConfigLoader.readConfig();
 		waves.forEach((wave) -> {
 			Label label = new Label(wave.toString());
 			labels.add(label);
