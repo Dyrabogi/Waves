@@ -35,7 +35,7 @@ public class SoundGenerator {
 		}
 		
 
-        File out = new File(fileName + ".wav");
+        File out = new File("generated/" + fileName + ".wav");
 
         final boolean bigEndian = false;
         final boolean signed = true;

@@ -29,9 +29,10 @@ public class ConfigLoader {
 	public static ArrayList<Wave> readConfig() {
 
 		try {
-			Path path = Paths.get("src/config.json");
+			Path path = Paths.get("config.json");
 			Gson g = new Gson();
 			String raw = Files.readString(path);
+			
 			Config config = g.fromJson(raw, Config.class);
 			return config.getWavesList();
 		} catch (IOException|JsonSyntaxException e) {
