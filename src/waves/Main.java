@@ -29,7 +29,7 @@ public class Main {
 		});
 
 		frame.add(labels, BorderLayout.PAGE_START);
-		frame.add(new WaveGraph(), BorderLayout.CENTER);
+		frame.add(new WaveGraph(waves), BorderLayout.CENTER);
 
 		frame.setLocationRelativeTo(null);
 

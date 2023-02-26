@@ -22,6 +22,10 @@ public class Wave {
 		return amp;
 	}
 
+	public double getPhase() {
+		return phase;
+	}
+	
 	@Override
 	public String toString() {
 		return "Fala [amp=" + amp + ", phase=" + phase + ", freq=" + freq + "]";

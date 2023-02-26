@@ -11,11 +11,11 @@ import javax.sound.sampled.AudioSystem;
 
 public class SoundGenerator {
 	public static void generate(Wave wave, String fileName) throws IOException {
-		final double sampleRate = 44100.0;
 		final double frequency = wave.getFreq();
 		final double amplitude = wave.getAmp();
-		final double seconds = 5.0;
+		final double seconds = 2.0;
 		final double twoPiF = 2 * Math.PI * frequency;
+		final double sampleRate = 2 * twoPiF;
 
 		float[] buffer = new float[(int) (seconds * sampleRate)];
 
