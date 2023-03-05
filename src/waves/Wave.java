@@ -14,6 +14,18 @@ public class Wave {
 
 	}
 
+	public void setAmp(double amp) {
+		this.amp = amp;
+	}
+
+	public void setPhase(double phase) {
+		this.phase = phase;
+	}
+
+	public void setFreq(double freq) {
+		this.freq = freq;
+	}
+
 	public double getFreq() {
 		return freq;
 	}
