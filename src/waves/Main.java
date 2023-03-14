@@ -2,6 +2,8 @@ package waves;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Label;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -73,11 +75,12 @@ public class Main {
 	    textPanel.add(cb);
 	    // getValue() always returns something valid
 		
-	    frame.add(slider, BorderLayout.WEST);
-		frame.add(waveLabels, BorderLayout.PAGE_START);
-		frame.add(sliderLabels, BorderLayout.EAST);
-		frame.add(graph, BorderLayout.CENTER);
-		frame.add(textPanel, BorderLayout.PAGE_END);
+	    frame.add(slider);
+		frame.add(waveLabels);
+		frame.add(sliderLabels);
+		frame.add(graph);
+		frame.add(textPanel);
+		frame.setLayout(new GridLayout(2,3));
 		frame.setLocationRelativeTo(null);
 
 		frame.setVisible(true);
