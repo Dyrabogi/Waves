@@ -21,7 +21,7 @@ public class SoundGenerator {
 
 		for (int sample = 0; sample < buffer.length; sample++) {
 			double time = sample / sampleRate;
-			buffer[sample] = (float) (amplitude * Math.sin(twoPiF * time));
+			buffer[sample] = (float) (amplitude * Math.sin(twoPiF * time)); 
 		}
 
 		final byte[] byteBuffer = new byte[buffer.length * 2];
