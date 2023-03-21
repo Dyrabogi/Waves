@@ -9,15 +9,12 @@ public class Slider extends JSlider {
 	
 	private JSlider slider = new JSlider();
 
-	public Slider(int minValue, int maxValue) {
-		super();
-		this.slider = new JSlider(minValue, maxValue);
-		slider.setPaintLabels(true);
-		slider.setPaintTicks(false);
-		slider.setPaintTrack(true);
-		
-		slider.setMinorTickSpacing((maxValue - minValue)/100);
-		slider.setMajorTickSpacing((maxValue - minValue)/10);
-					
+	public Slider(int minValue, int maxValue, int majorTick) {
+		super(JSlider.HORIZONTAL, minValue, maxValue, 0);
+		setMinorTickSpacing(majorTick/3);
+		setMajorTickSpacing(majorTick);
+		setPaintLabels(true);
+		setPaintTicks(true);
+		setPaintTrack(true);
 	}
 }
