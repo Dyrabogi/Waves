@@ -6,8 +6,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 public class Main {
 
@@ -46,9 +44,9 @@ public class Main {
 		DecimalFormat format = new DecimalFormat();
 
 		JButton parametryDzieku=new JButton("Parametry dźwięku");
-		parametryDzieku.addActionListener(new ParametryDzwieku());
+		parametryDzieku.addActionListener(new SoundParameters());
 		JButton parametryOsrodka=new JButton("Parametry ośrodka");
-		parametryOsrodka.addActionListener(new ParametryOsrodka());
+		parametryOsrodka.addActionListener(new MediumParameters());
 		JButton angielski=new JButton("Angielski");
 		JButton polski=new JButton("Polski");
 		JLabel tempo=new JLabel("Tempo Symulacji");
