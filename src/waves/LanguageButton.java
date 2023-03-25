@@ -17,11 +17,11 @@ public class LanguageButton implements ActionListener {
             Menu.zapisz.setText("Save the graph");
             Menu.zListy.setText("Select from the list");
             Menu.detektor.setText("Detector");
-
+            Main.comboBoxText.setText("Choose which sound parameters you want to change");
             Main.polski.setText("Polish");
             Main.angielski.setText("English");
             Main.tempo.setText("Speed of animation");
-            Main.parametryDzieku.setText("Sound Parameters");
+            Main.parametryDziweku.setText("Parameters of sound number "+ (Main.cb.getSelectedIndex()+1) );
             Main.parametryOsrodka.setText("Medium Parameters");
         }
         if(Main.polski.isSelected()){
@@ -35,11 +35,11 @@ public class LanguageButton implements ActionListener {
             Menu.zapisz.setText("Zapisz wykres");
             Menu.zListy.setText("Wybierz z listy");
             Menu.detektor.setText("Detektor");
-
+            Main.comboBoxText.setText("Wybierz, parametry którego dźwięku chcesz zmienić");
             Main.polski.setText("polski");
             Main.angielski.setText("angielski");
             Main.tempo.setText("Tempo animacji");
-            Main.parametryDzieku.setText("Parametry dźwięku");
+            Main.parametryDziweku.setText("Parametry dzwięku nr "+ (Main.cb.getSelectedIndex()+1) );
             Main.parametryOsrodka.setText("Parametry ośrodka");
 
         }

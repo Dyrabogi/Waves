@@ -1,6 +1,8 @@
 package waves;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +31,29 @@ public class SoundParameters implements ActionListener {
         }
 
         Slider ampSlider=new Slider(0, 100, 10);
+        ampSlider.addChangeListener(new ChangeListener() {
+            @Override
+                public void stateChanged(ChangeEvent e) {
+                    Main.waves.get(Main.cb.getSelectedIndex()).setAmp(ampSlider.getValue());
+                    Main.waveLabel.get(Main.cb.getSelectedIndex()).setText(Main.waves.get(Main.cb.getSelectedIndex()).toString());
+            }
+        });
         Slider czeSlider=new Slider(0, 100, 10);
+        czeSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                Main.waves.get(Main.cb.getSelectedIndex()).setFreq(czeSlider.getValue());
+                Main.waveLabel.get(Main.cb.getSelectedIndex()).setText(Main.waves.get(Main.cb.getSelectedIndex()).toString());
+            }
+        });
         Slider przesSlider=new Slider(0, 100, 10);
+        przesSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                Main.waves.get(Main.cb.getSelectedIndex()).setPhase(przesSlider.getValue());
+                Main.waveLabel.get(Main.cb.getSelectedIndex()).setText(Main.waves.get(Main.cb.getSelectedIndex()).toString());
+            }
+        });
         JTextField ampText=new JTextField();
         JTextField czeText=new JTextField();
         JTextField przeText=new JTextField();

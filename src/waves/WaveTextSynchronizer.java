@@ -35,13 +35,11 @@ public class WaveTextSynchronizer implements DocumentListener {
 			waves.get(comboBox.getSelectedIndex()).setAmp(0);
 		}
 		((Label) labels.getComponent(comboBox.getSelectedIndex())).setText(waves.get(comboBox.getSelectedIndex()).toString());
-		graph.repaint();
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		update();
-
 	}
 
 	@Override

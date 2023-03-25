@@ -8,17 +8,18 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class Main {
-	static JButton parametryDzieku, parametryOsrodka;
+	static JButton parametryDziweku, parametryOsrodka;
 	static JRadioButton angielski, polski;
 	static JFrame frame;
 	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki;
 	static Slider slider, tempoSymulacji;
 	static Label sliderLabel;
-	static JLabel tempo;
+	static JLabel tempo, comboBoxText;
 	static JComboBox<String> cb;
 	static Menu rozwijane;
 	static WaveGraph graph;
 	static ArrayList<Wave> waves;
+	static ArrayList<Label> waveLabel;
 
 	public static void main(String[] args) {
 		frame = new JFrame();
@@ -27,14 +28,14 @@ public class Main {
 		frame.setSize(1280, 720);
 
 		waveLabels = new JPanel();
+		waveLabel=new ArrayList<Label>();
 		waves = ConfigLoader.readConfig();
 	    ArrayList<String> choices = new ArrayList<String>() ;
 
-
 	    int waveIdx = 0;
 		for (Wave wave: waves) {
-			Label waveLabel = new Label(wave.toString());
-			waveLabels.add(waveLabel);
+			waveLabel.add(new Label(wave.toString())) ;
+			waveLabels.add(waveLabel.get(waveIdx));
 			choices.add(String.valueOf(waveIdx));
 			waveIdx++;
 			try {
@@ -49,13 +50,13 @@ public class Main {
 		sliderLabels = new JPanel();
 		sliderLabel = new Label("Amplituda: " +String.valueOf((double) slider.getValue()/10));
 		sliderLabels.add(sliderLabel);
-		
+		comboBoxText=new JLabel("Wybierz, parametry którego dźwięku chcesz zmienić");
 		textPanel = new JPanel();
 		textPanel.setSize(100, 100);
 		DecimalFormat format = new DecimalFormat();
 
-		parametryDzieku=new JButton("Parametry dźwięku");
-		parametryDzieku.addActionListener(new SoundParameters());
+		parametryDziweku =new JButton("Parametry dźwięku nr 1");
+		parametryDziweku.addActionListener(new SoundParameters());
 		parametryOsrodka=new JButton("Parametry ośrodka");
 		parametryOsrodka.addActionListener(new MediumParameters());
 		angielski=new JRadioButton("Angielski");
@@ -71,18 +72,19 @@ public class Main {
 			
 	    JFormattedTextField field = new JFormattedTextField(format);
 	    field.setPreferredSize(new Dimension(500,25));
-	    
-	    
+
 	    textPanel.add(field);
 	    
 	    String[] arr = choices.toArray(new String[0]);
 
 	    cb = new JComboBox<String>(arr);
+		cb.addActionListener(new ComboBoxListener());
 	    graph = new WaveGraph(waves);
 
 	    field.getDocument().addDocumentListener(new WaveTextSynchronizer(waves, waveLabels, field, cb, graph));
-	    slider.addChangeListener(new SliderTextSynchronizer(slider, sliderLabels,graph, waveLabels,waves));
-	    
+	    slider.addChangeListener(new SliderTextSynchronizer(slider, sliderLabels,graph, waveLabels,waves, cb));
+
+		textPanel.add(comboBoxText);
 	    textPanel.add(cb);
 	    // getValue() always returns something valid
 
@@ -99,7 +101,7 @@ public class Main {
 		north.add(waveLabels);
 	    frame.add(slider, BorderLayout.WEST);
 		east.add(sliderLabels);
-		east.add(parametryDzieku);
+		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
 		east.add(tempo);
 		east.add(tempoSymulacji);
