@@ -28,7 +28,7 @@ public class MediumParameters implements ActionListener {
             dialog.add(lista);
         }
         Slider cisSlider=new Slider(0, 10, 3);
-        JTextField cisText=new JTextField();
+        JFormattedTextField cisText=new JFormattedTextField();
 
         dialog.add(cisSlider);
         dialog.add(cisText);

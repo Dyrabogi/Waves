@@ -3,6 +3,8 @@ package waves;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,9 +56,12 @@ public class SoundParameters implements ActionListener {
                 Main.waveLabel.get(Main.cb.getSelectedIndex()).setText(Main.waves.get(Main.cb.getSelectedIndex()).toString());
             }
         });
-        JTextField ampText=new JTextField();
-        JTextField czeText=new JTextField();
-        JTextField przeText=new JTextField();
+        JFormattedTextField ampText=new JFormattedTextField();
+        ampText.getDocument().addDocumentListener(new WaveTextSynchronizer(Main.waves, Main.waveLabels, ampText, Main.cb, Main.graph, "amplituda"));
+        JFormattedTextField czeText=new JFormattedTextField();
+        czeText.getDocument().addDocumentListener(new WaveTextSynchronizer(Main.waves, Main.waveLabels, czeText, Main.cb, Main.graph, "czestotliwosc"));
+        JFormattedTextField przeText=new JFormattedTextField();
+        przeText.getDocument().addDocumentListener(new WaveTextSynchronizer(Main.waves, Main.waveLabels, przeText, Main.cb, Main.graph, "faza"));
         dialog.add(amplituda);
         dialog.add(ampSlider);
         dialog.add(ampText);
@@ -67,7 +72,7 @@ public class SoundParameters implements ActionListener {
         dialog.add(przesSlider);
         dialog.add(przeText);
         Slider mocSlider=new Slider(0, 10, 3);
-        JTextField mocText=new JTextField();
+        JFormattedTextField mocText=new JFormattedTextField();
         dialog.add(moc);
         dialog.add(mocSlider);
         dialog.add(mocText);

@@ -81,7 +81,7 @@ public class Main {
 		cb.addActionListener(new ComboBoxListener());
 	    graph = new WaveGraph(waves);
 
-	    field.getDocument().addDocumentListener(new WaveTextSynchronizer(waves, waveLabels, field, cb, graph));
+	    field.getDocument().addDocumentListener(new WaveTextSynchronizer(waves, waveLabels, field, cb, graph, "amplituda"));
 	    slider.addChangeListener(new SliderTextSynchronizer(slider, sliderLabels,graph, waveLabels,waves, cb));
 
 		textPanel.add(comboBoxText);
