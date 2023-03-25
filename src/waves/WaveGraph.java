@@ -20,16 +20,18 @@ public class WaveGraph extends JPanel {
 
 		Polygon p = new Polygon();
 
-
-		for (double x = 0.001; x <= 1000; x++) {
-			int y=0;
-			for(int i=0; i< waves.size(); i++){
-				y+=(int) 200-(waves.get(i).getAmp() * Math.sin(2*3.14*waves.get(i).getFreq() * x+waves.get(i).getPhase()));
+		double y;
+		for (double x =0.001; x <= 1000; x++) {
+			y=0;
+			for(int i=0; i<waves.size()-1; i++){
+				y+=400-(waves.get(i).getAmp() * Math.sin(2*3.14*waves.get(i).getFreq()*x+waves.get(i).getPhase()));
 			}
-			p.addPoint((int) x, y);
+			p.addPoint((int)x, (int)y);
 		}
 		g.setColor(Color.red);
 		g.drawPolyline(p.xpoints, p.ypoints, p.npoints);
+		Main.frame.repaint();
+		Main.frame.revalidate();
 	}
 
 

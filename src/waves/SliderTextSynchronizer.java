@@ -27,10 +27,10 @@ public class SliderTextSynchronizer implements ChangeListener {
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		((Label) sliderLabels.getComponent(0)).setText(String.valueOf((double) slider.getValue()/10));
-		System.out.println( (double) slider.getValue()/10);
 		waves.get(0).setAmp(slider.getValue());
 		((Label) waveLabels.getComponent(0)).setText(waves.get(0).toString());
-		graph.repaint();
+		Main.frame.repaint();
+		Main.frame.revalidate();
 	}
 		
 }

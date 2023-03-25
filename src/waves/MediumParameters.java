@@ -15,14 +15,23 @@ public class MediumParameters implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JDialog dialog=new JDialog();
         dialog.setLayout(new GridLayout(4, 1));
-        JLabel cisnienie=new JLabel("Ciśnienie");
+        if(Main.polski.isSelected()){
+            JLabel cisnienie=new JLabel("Ciśnienie");
+            JButton lista=new JButton("Wybierz z listy");
+            dialog.add(cisnienie);
+            dialog.add(lista);
+        }
+        else{
+            JLabel cisnienie=new JLabel("Pressure");
+            JButton lista=new JButton("Choose from a list");
+            dialog.add(cisnienie);
+            dialog.add(lista);
+        }
         Slider cisSlider=new Slider(0, 10, 3);
         JTextField cisText=new JTextField();
-        dialog.add(cisnienie);
+
         dialog.add(cisSlider);
         dialog.add(cisText);
-        JButton lista=new JButton("Wybierz z listy");
-        dialog.add(lista);
         dialog.setSize(300,300);
         dialog.setVisible(true);
     }

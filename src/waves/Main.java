@@ -8,17 +8,30 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class Main {
+	static JButton parametryDzieku, parametryOsrodka;
+	static JRadioButton angielski, polski;
+	static JFrame frame;
+	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki;
+	static Slider slider, tempoSymulacji;
+	static Label sliderLabel;
+	static JLabel tempo;
+	static JComboBox<String> cb;
+	static Menu rozwijane;
+	static WaveGraph graph;
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.setSize(1280, 720);
 
-		JPanel waveLabels = new JPanel();
-		ArrayList<Wave> waves = ConfigLoader.readConfig();
+		waveLabels = new JPanel();
+		//ArrayList<Wave> waves = ConfigLoader.readConfig();
 	    ArrayList<String> choices = new ArrayList<String>() ;
 
+		ArrayList<Wave> waves=new ArrayList<Wave>(0);
+		waves.add(new Wave(10, 0, 40));
+		waves.add(new Wave(10, 2, 40));
 	    int waveIdx = 0;
 		for (Wave wave: waves) {
 			Label waveLabel = new Label(wave.toString());
@@ -30,27 +43,32 @@ public class Main {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		};
 		
-		Slider slider = new Slider(0,300, 50);
+		slider = new Slider(0,300, 50);
 
-		JPanel sliderLabels = new JPanel();
-		Label sliderLabel = new Label("Amplituda: " +String.valueOf((double) slider.getValue()/10));
+		sliderLabels = new JPanel();
+		sliderLabel = new Label("Amplituda: " +String.valueOf((double) slider.getValue()/10));
 		sliderLabels.add(sliderLabel);
 		
-		JPanel textPanel = new JPanel();
+		textPanel = new JPanel();
 		textPanel.setSize(100, 100);
 		DecimalFormat format = new DecimalFormat();
 
-		JButton parametryDzieku=new JButton("Parametry dźwięku");
+		parametryDzieku=new JButton("Parametry dźwięku");
 		parametryDzieku.addActionListener(new SoundParameters());
-		JButton parametryOsrodka=new JButton("Parametry ośrodka");
+		parametryOsrodka=new JButton("Parametry ośrodka");
 		parametryOsrodka.addActionListener(new MediumParameters());
-		JButton angielski=new JButton("Angielski");
-		JButton polski=new JButton("Polski");
-		JLabel tempo=new JLabel("Tempo Symulacji");
-		Slider tempoSymulacji=new Slider(0, 10, 3);
+		angielski=new JRadioButton("Angielski");
+		angielski.addActionListener(new LanguageButton());
+		polski=new JRadioButton("Polski");
+		polski.addActionListener(new LanguageButton());
+		ButtonGroup group=new ButtonGroup();
+		group.add(angielski);
+		group.add(polski);
+		polski.setSelected(true);
+		tempo=new JLabel("Tempo Symulacji");
+		tempoSymulacji=new Slider(0, 10, 3);
 			
 	    JFormattedTextField field = new JFormattedTextField(format);
 	    field.setPreferredSize(new Dimension(500,25));
@@ -59,11 +77,9 @@ public class Main {
 	    textPanel.add(field);
 	    
 	    String[] arr = choices.toArray(new String[0]);
-	    
 
-
-	    JComboBox<String> cb = new JComboBox<String>(arr);
-	    WaveGraph graph = new WaveGraph(waves);
+	    cb = new JComboBox<String>(arr);
+	    graph = new WaveGraph(waves);
 
 	    field.getDocument().addDocumentListener(new WaveTextSynchronizer(waves, waveLabels, field, cb, graph));
 	    slider.addChangeListener(new SliderTextSynchronizer(slider, sliderLabels,graph, waveLabels,waves));
@@ -71,15 +87,15 @@ public class Main {
 	    textPanel.add(cb);
 	    // getValue() always returns something valid
 
-		JPanel north=new JPanel();
-		JPanel east=new JPanel();
-		JPanel jezyki=new JPanel();
+		north=new JPanel();
+		east=new JPanel();
+		jezyki=new JPanel();
 		jezyki.setLayout(new GridLayout(1, 2));
 		jezyki.add(angielski);
 		jezyki.add(polski);
 		east.setLayout(new GridLayout(6, 1));
 		north.setLayout(new GridLayout(1, 4));
-		Menu rozwijane=new Menu();
+		rozwijane=new Menu();
 		north.add(rozwijane);
 		north.add(waveLabels);
 	    frame.add(slider, BorderLayout.WEST);

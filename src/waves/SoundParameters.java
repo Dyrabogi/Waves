@@ -11,9 +11,23 @@ public class SoundParameters implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JDialog dialog=new JDialog();
         dialog.setLayout(new GridLayout(13, 1));
-        JLabel amplituda=new JLabel("Amplituda");
-        JLabel przesuniecie=new JLabel("Przesunięcie fazowe");
-        JLabel czestotliwosc=new JLabel("Częstotliwość");
+        JLabel amplituda=new JLabel();
+        JLabel przesuniecie=new JLabel();
+        JLabel czestotliwosc=new JLabel();
+        JLabel moc=new JLabel();
+        if(Main.polski.isSelected()){
+            amplituda.setText("Amplituda");
+            przesuniecie.setText("Przesunięcie fazowe");
+            czestotliwosc.setText("Częstotliwość");
+            moc.setText("Moc akustyczna");
+        }
+        else{
+            amplituda.setText("Amplitude");
+            przesuniecie.setText("Phase shift");
+            czestotliwosc.setText("Frequency");
+            moc.setText("Acustic power");
+        }
+
         Slider ampSlider=new Slider(0, 100, 10);
         Slider czeSlider=new Slider(0, 100, 10);
         Slider przesSlider=new Slider(0, 100, 10);
@@ -29,8 +43,6 @@ public class SoundParameters implements ActionListener {
         dialog.add(przesuniecie);
         dialog.add(przesSlider);
         dialog.add(przeText);
-
-        JLabel moc=new JLabel("Moc akustyczna");
         Slider mocSlider=new Slider(0, 10, 3);
         JTextField mocText=new JTextField();
         dialog.add(moc);

@@ -38,7 +38,7 @@ public class ConfigLoader {
 		} catch (IOException|JsonSyntaxException e) {
 
 			ArrayList<Wave> defaultConfig = new ArrayList<Wave>();
-			defaultConfig.add(new Wave(1, 0, 1));
+			defaultConfig.add(new Wave(0, 0, 0));
 			return defaultConfig;
 		}
 	}
