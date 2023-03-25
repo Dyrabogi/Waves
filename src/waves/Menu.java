@@ -1,6 +1,8 @@
 package waves;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class Menu extends JMenuBar {
@@ -24,6 +26,12 @@ public class Menu extends JMenuBar {
         odtworz=new JMenuItem("Odtwórz dźwięk");
         detektor.add(odtworz);
         pokaz=new JMenuItem("Pokaż wykres fali");
+        pokaz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WaveGraph.frame1.setVisible(true);
+            }
+        });
         detektor.add(pokaz);
         zapisz=new JMenuItem("Zapisz wykres fali");
         detektor.add(zapisz);

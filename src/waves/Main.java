@@ -26,12 +26,10 @@ public class Main {
 		frame.setSize(1280, 720);
 
 		waveLabels = new JPanel();
-		//ArrayList<Wave> waves = ConfigLoader.readConfig();
+		ArrayList<Wave> waves = ConfigLoader.readConfig();
 	    ArrayList<String> choices = new ArrayList<String>() ;
 
-		ArrayList<Wave> waves=new ArrayList<Wave>(0);
-		waves.add(new Wave(10, 0, 40));
-		waves.add(new Wave(10, 2, 40));
+
 	    int waveIdx = 0;
 		for (Wave wave: waves) {
 			Label waveLabel = new Label(wave.toString());
