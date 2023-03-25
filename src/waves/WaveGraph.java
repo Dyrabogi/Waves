@@ -9,6 +9,8 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -18,9 +20,10 @@ public class WaveGraph extends JPanel {
 
 	ArrayList<Wave> waves;
 	static ChartFrame frame1;
+	JFreeChart chart;
 	public WaveGraph(ArrayList<Wave> waves) {
 		super();
-		XYSeries series = new XYSeries("Wykres fali wynikowej");
+		XYSeries series = new XYSeries(" f(x) ");
 		double y;
 		for (double x =0.1; x <= 1000; x++) {
 			y=0;
@@ -31,17 +34,32 @@ public class WaveGraph extends JPanel {
 		}
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(series);
-		JFreeChart chart = ChartFactory.createXYLineChart(
-				"Wykres fali wynikowej",//Tytul
-				"t (s)", // opisy osi
-				" ",
-				dataset, // Dane
-				PlotOrientation.VERTICAL, // Orjentacja wykresu
-				true, // legenda
-				true, // tooltips
-				false
-		);
-		frame1=new ChartFrame("Bar Chart",chart);
+		if(Main.polski.isSelected()){
+			chart = ChartFactory.createXYLineChart(
+					"Wykres fali wynikowej",//Tytul
+					"t (s)", // opisy osi
+					" ",
+					dataset, // Dane
+					PlotOrientation.VERTICAL, // Orjentacja wykresu
+					true, // legenda
+					true, // tooltips
+					false
+			);
+		}
+		if(Main.angielski.isSelected()){
+			chart = ChartFactory.createXYLineChart(
+					"Wave graph",//Tytul
+					"t (s)", // opisy osi
+					" ",
+					dataset, // Dane
+					PlotOrientation.VERTICAL, // Orjentacja wykresu
+					true, // legenda
+					true, // tooltips
+					false
+			);
+		}
+
+		frame1=new ChartFrame("Chart",chart);
 		frame1.setSize(1400,600);
 		this.waves = waves;
 	}

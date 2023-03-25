@@ -29,8 +29,8 @@ public class SliderTextSynchronizer implements ChangeListener {
 		((Label) sliderLabels.getComponent(0)).setText(String.valueOf((double) slider.getValue()/10));
 		waves.get(0).setAmp(slider.getValue());
 		((Label) waveLabels.getComponent(0)).setText(waves.get(0).toString());
-		Main.frame.repaint();
-		Main.frame.revalidate();
+		WaveGraph.frame1.revalidate();
+		WaveGraph.frame1.repaint();
 	}
 		
 }

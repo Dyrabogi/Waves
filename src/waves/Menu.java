@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static waves.WaveGraph.*;
+
 
 public class Menu extends JMenuBar {
 
@@ -29,9 +31,13 @@ public class Menu extends JMenuBar {
         pokaz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WaveGraph.frame1.setVisible(true);
+               WaveGraph graph= new WaveGraph(Main.waves);
+                     graph.repaint();
+                     graph.revalidate();
+                     graph.frame1.setVisible(true);
             }
         });
+
         detektor.add(pokaz);
         zapisz=new JMenuItem("Zapisz wykres fali");
         detektor.add(zapisz);

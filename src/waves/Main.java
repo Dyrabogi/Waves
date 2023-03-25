@@ -18,6 +18,7 @@ public class Main {
 	static JComboBox<String> cb;
 	static Menu rozwijane;
 	static WaveGraph graph;
+	static ArrayList<Wave> waves;
 
 	public static void main(String[] args) {
 		frame = new JFrame();
@@ -26,7 +27,7 @@ public class Main {
 		frame.setSize(1280, 720);
 
 		waveLabels = new JPanel();
-		ArrayList<Wave> waves = ConfigLoader.readConfig();
+		waves = ConfigLoader.readConfig();
 	    ArrayList<String> choices = new ArrayList<String>() ;
 
 
@@ -108,7 +109,6 @@ public class Main {
 		frame.add(east, BorderLayout.EAST);
 		frame.add(north, BorderLayout.NORTH);
 		frame.setLocationRelativeTo(null);
-
 		frame.setVisible(true);
 		
 	}
