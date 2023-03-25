@@ -23,7 +23,7 @@ public class WaveGraph extends JPanel {
 		double y;
 		for (double x =0.001; x <= 1000; x++) {
 			y=0;
-			for(int i=0; i<waves.size()-1; i++){
+			for(int i=0; i<=waves.size()-1; i++){
 				y+=400-(waves.get(i).getAmp() * Math.sin(2*3.14*waves.get(i).getFreq()*x+waves.get(i).getPhase()));
 			}
 			p.addPoint((int)x, (int)y);
