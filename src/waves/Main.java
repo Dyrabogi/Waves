@@ -7,10 +7,9 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class Main {
+public class Main extends JFrame{
 	static JButton parametryDziweku, parametryOsrodka;
 	static JRadioButton angielski, polski;
-	static JFrame frame;
 	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki;
 	static Slider tempoSymulacji;
 	static JLabel tempo, comboBoxText;
@@ -21,17 +20,18 @@ public class Main {
 	static ArrayList<Label> waveLabel;
 	static int waveIdx=0;
 	static ArrayList<String> choices;
-	public static void main(String[] args) {
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new BorderLayout());
-		frame.setSize(1280, 720);
+
+	Main() throws HeadlessException{
+
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.setSize(1280, 720);
 
 		waveLabels = new JPanel();
 		waveLabels.setLayout(new GridLayout(2, 1));
 		waveLabel=new ArrayList<Label>();
 		waves = ConfigLoader.readConfig();
-	    choices = new ArrayList<String>() ;
+		choices = new ArrayList<String>() ;
 
 		for (Wave wave: waves) {
 			waveLabel.add(new Label(wave.toString())) ;
@@ -64,13 +64,13 @@ public class Main {
 		tempo=new JLabel("Tempo Symulacji");
 		tempoSymulacji=new Slider(0, 10, 3);
 
-	    String[] arr = choices.toArray(new String[0]);
+		String[] arr = choices.toArray(new String[0]);
 
-	    cb = new JComboBox<String>(arr);
+		cb = new JComboBox<String>(arr);
 		cb.addActionListener(new ComboBoxListener());
 
 		textPanel.add(comboBoxText);
-	    textPanel.add(cb);
+		textPanel.add(cb);
 
 		north=new JPanel();
 		east=new JPanel();
@@ -89,10 +89,14 @@ public class Main {
 		east.add(tempo);
 		east.add(tempoSymulacji);
 		east.add(jezyki);
-		frame.add(textPanel, BorderLayout.PAGE_END);
-		frame.add(east, BorderLayout.EAST);
-		frame.add(north, BorderLayout.NORTH);
-		frame.setLocationRelativeTo(null);
+		this.add(textPanel, BorderLayout.PAGE_END);
+		this.add(east, BorderLayout.EAST);
+		this.add(north, BorderLayout.NORTH);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+	public static void main(String[] args) {
+		Main frame=new Main();
 		frame.setVisible(true);
 	}
 }

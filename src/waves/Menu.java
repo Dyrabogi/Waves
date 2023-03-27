@@ -29,7 +29,7 @@ public class Menu extends JMenuBar {
                 Main.waveLabels.setLayout(new GridLayout(Main.waveIdx+1, 1));
                 Main.waveLabels.add(Main.waveLabel.get(Main.waveIdx));
                 Main.cb.addItem(String.valueOf(Main.waveIdx+1));
-                Main.frame.revalidate();
+                revalidate();
                 Main.waveIdx++;
             }
         });
@@ -45,7 +45,7 @@ public class Menu extends JMenuBar {
                 Main.waveLabels.setLayout(new GridLayout(Main.waveIdx+1, 1));
                 Main.waveLabels.add(Main.waveLabel.get(Main.waveIdx));
                 Main.cb.addItem(String.valueOf(Main.waveIdx+1));
-                Main.frame.revalidate();
+                revalidate();
                 Main.waveIdx++;
             }
         });
