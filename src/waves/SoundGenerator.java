@@ -9,6 +9,8 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
+
+
 public class SoundGenerator {
 	public static void generate(Wave wave, String fileName) throws IOException {
 		final double frequency = wave.getFreq();
@@ -17,6 +19,9 @@ public class SoundGenerator {
 		final double twoPiF = 2 * Math.PI * frequency;
 		final double sampleRate = 2 * twoPiF;
 
+		// kod zapożyczony z https://stackoverflow.com/
+		
+		
 		float[] buffer = new float[(int) (seconds * sampleRate)];
 
 		for (int sample = 0; sample < buffer.length; sample++) {
@@ -48,5 +53,7 @@ public class SoundGenerator {
         AudioInputStream audioInputStream = new AudioInputStream(bais, format, buffer.length);
         AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, out);
         audioInputStream.close();
+
+        // koniec kodu
 	}
 }
