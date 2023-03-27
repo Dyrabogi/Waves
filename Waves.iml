@@ -9,7 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.10.1" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -19,5 +18,36 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.10.1" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:data:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:util:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-guava:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:collections-foundation:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.4" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20090211" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:stats:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:collections:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: colt:colt:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: concurrent:concurrent:1.3.4" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.trove4j:trove4j:3.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:logging:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:logging-log4j:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.6" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.findbugs:annotations:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: com.facebook.jcommon:concurrent-stats:0.1.32" level="project" />
+    <orderEntry type="library" name="Maven: org.jcommon:graph:1.3" level="project" />
+    <orderEntry type="library" name="Maven: org.jfree:jfreechart:1.0.14" level="project" />
+    <orderEntry type="library" name="Maven: org.jfree:jcommon:1.0.17" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.3.04" level="project" />
+    <orderEntry type="library" name="Maven: com.lowagie:itext:2.1.5" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcmail-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcprov-jdk14:138" level="project" />
   </component>
 </module>
