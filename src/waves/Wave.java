@@ -5,8 +5,6 @@ public class Wave {
 	private double phase = 0;
 	private double freq = 1;
 
-
-
 	public Wave(double amp, double phase, double freq) {
 		this.amp = amp;
 		this.phase = phase;
@@ -37,7 +35,7 @@ public class Wave {
 	public double getPhase() {
 		return phase;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Fala [amp=" + amp + ", phase=" + phase + ", freq=" + freq + "]";

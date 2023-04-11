@@ -1,8 +1,4 @@
-/.settings
 /bin
-.classpath
-.project
-/target
-sound.wav
-/generated/*.wav
-*.log
+/.settings
+/bin/*
+/.settings/*

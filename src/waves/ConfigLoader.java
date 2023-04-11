@@ -32,10 +32,10 @@ public class ConfigLoader {
 			Path path = Paths.get("config.json");
 			Gson g = new Gson();
 			String raw = Files.readString(path);
-			
+
 			Config config = g.fromJson(raw, Config.class);
 			return config.getWavesList();
-		} catch (IOException|JsonSyntaxException e) {
+		} catch (IOException | JsonSyntaxException e) {
 
 			ArrayList<Wave> defaultConfig = new ArrayList<Wave>();
 			defaultConfig.add(new Wave(0, 0, 0));

@@ -9,8 +9,6 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
-
-
 public class SoundGenerator {
 	public static void generate(Wave wave, String fileName) throws IOException {
 		final double frequency = wave.getFreq();
@@ -20,13 +18,12 @@ public class SoundGenerator {
 		final double sampleRate = 2 * twoPiF;
 
 		// kod zapożyczony z https://stackoverflow.com/
-		
-		
+
 		float[] buffer = new float[(int) (seconds * sampleRate)];
 
 		for (int sample = 0; sample < buffer.length; sample++) {
 			double time = sample / sampleRate;
-			buffer[sample] = (float) (amplitude * Math.sin(twoPiF * time)); 
+			buffer[sample] = (float) (amplitude * Math.sin(twoPiF * time));
 		}
 
 		final byte[] byteBuffer = new byte[buffer.length * 2];
@@ -38,22 +35,21 @@ public class SoundGenerator {
 			byteBuffer[i++] = (byte) x;
 			byteBuffer[i] = (byte) (x >>> 8);
 		}
-		
 
-        File out = new File("generated/" + fileName + ".wav");
+		File out = new File("generated/" + fileName + ".wav");
 
-        final boolean bigEndian = false;
-        final boolean signed = true;
+		final boolean bigEndian = false;
+		final boolean signed = true;
 
-        final int bits = 16;
-        final int channels = 1;
+		final int bits = 16;
+		final int channels = 1;
 
-        AudioFormat format = new AudioFormat((float)sampleRate, bits, channels, signed, bigEndian);
-        ByteArrayInputStream bais = new ByteArrayInputStream(byteBuffer);
-        AudioInputStream audioInputStream = new AudioInputStream(bais, format, buffer.length);
-        AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, out);
-        audioInputStream.close();
+		AudioFormat format = new AudioFormat((float) sampleRate, bits, channels, signed, bigEndian);
+		ByteArrayInputStream bais = new ByteArrayInputStream(byteBuffer);
+		AudioInputStream audioInputStream = new AudioInputStream(bais, format, buffer.length);
+		AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, out);
+		audioInputStream.close();
 
-        // koniec kodu
+		// koniec kodu
 	}
 }
