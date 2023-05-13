@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
 //			}
 //		}
 //		;
-		sliderLabels = new JPanel();
+		
 		comboBoxText = new JLabel("Wybierz, parametry którego dźwięku chcesz zmienić");
 		textPanel = new JPanel();
 		textPanel.setSize(100, 100);
@@ -82,12 +82,12 @@ public class MainFrame extends JFrame {
 		jezyki.setLayout(new GridLayout(1, 2));
 		jezyki.add(angielski);
 		jezyki.add(polski);
-		east.setLayout(new GridLayout(6, 1));
-		north.setLayout(new GridLayout(1, 3));
+		east.setLayout(new GridLayout(5, 1));
+		north.setLayout(new GridLayout(1, 2));
 		rozwijane = new Menu();
 		north.add(rozwijane);
 		north.add(waveLabels);
-		east.add(sliderLabels);
+	
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
 		east.add(tempo);

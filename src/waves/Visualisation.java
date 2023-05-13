@@ -77,12 +77,24 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 				 if(e.getX()>=Visualisation.speakers.get(i).getxPos() && e.getX()<=Visualisation.speakers.get(i).getxWidth()
 						 && e.getY()>=Visualisation.speakers.get(i).getyPos() && e.getY()<=Visualisation.speakers.get(i).getyWidth()) {
 	
-			JPopupMenu popupmenu = new JPopupMenu("Zmień źódło dźwięku");   
-	         JMenuItem change = new JMenuItem("Zmień parametry");
+					 if(MainFrame.angielski.isSelected()) {
+						 JPopupMenu popupmenu = new JPopupMenu("Change parameters");   
+				         JMenuItem change = new JMenuItem("Change parameters of sound "+ (i+1));
+				         MainFrame.cb.setSelectedIndex(i);
+				         change.addActionListener(new SoundParameters());
+				         popupmenu.add(change);   
+				         popupmenu.show(MainFrame.center, e.getX(), e.getY()); 
+					 }
+					 else {
+						 JPopupMenu popupmenu = new JPopupMenu("Zmień źódło dźwięku");   
+	         JMenuItem change = new JMenuItem("Zmień parametry dźwięku "+ (i+1));
 	         MainFrame.cb.setSelectedIndex(i);
 	         change.addActionListener(new SoundParameters());
 	         popupmenu.add(change);   
 	         popupmenu.show(MainFrame.center, e.getX(), e.getY()); 
+					 }
+			
+	         
 	         
 	}}}}
 	public void mouseEntered(MouseEvent e) {}
