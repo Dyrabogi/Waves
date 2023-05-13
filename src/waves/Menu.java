@@ -2,6 +2,8 @@ package waves;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -82,27 +84,33 @@ public class Menu extends JMenuBar {
 		});
 
 		detektor.add(pokaz);
+		
+		fc.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+	
 		zapisz = new JMenuItem("Zapisz wykres fali");
-//		zapisz.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				int returnVal = fc.showSaveDialog(null);
-//	            if (returnVal == JFileChooser.APPROVE_OPTION) {
-//	            	File outputFile = fc.getSelectedFile();
-//	            
-//				
-//				try {
-//					ImageIO.write(graph.getImage(), "jpg", outputFile);
-//				}
-//				catch (IOException e2) {
-//					System.out.println(e2.getMessage());
-//				}
-//	            }
-//				
-//			}});
-//		
+		zapisz.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int returnVal = fc.showSaveDialog(null);
+	            if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            	File outputFile = fc.getSelectedFile();
+	            	if (!outputFile.getAbsolutePath().endsWith(".png")) {
+	            	    outputFile = new File(outputFile.toString() + ".png");
+	            	}    
+	            	
+				try {
+					ImageIO.write(graph.getImage(), "png", outputFile);
+				}
+				catch (IOException e2) {
+					System.out.println(e2.getMessage());
+				}
+	            }
+
+				
+			}});
+		
 		detektor.add(zapisz);
 		this.add(detektor);
 	}}

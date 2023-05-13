@@ -79,6 +79,7 @@ public class WaveGraph extends JPanel {
 	}
 
 	public BufferedImage getImage() {
+		image = chart.createBufferedImage(500, 500);
 		return image;
 	}
 	
