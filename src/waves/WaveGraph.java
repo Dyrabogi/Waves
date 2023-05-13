@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -20,7 +21,8 @@ public class WaveGraph extends JPanel {
 	ArrayList<Wave> waves;
 	static ChartFrame frame1;
 	JFreeChart chart;
-
+	XYSeriesCollection dataset = new XYSeriesCollection();
+	BufferedImage image;
 	public WaveGraph(ArrayList<Wave> waves) {
 		super();
 		XYSeries series = new XYSeries(" f(x) ");
@@ -32,7 +34,7 @@ public class WaveGraph extends JPanel {
 			}
 			series.add(x, y);
 		}
-		XYSeriesCollection dataset = new XYSeriesCollection();
+//		XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(series);
 		if (MainFrame.polski.isSelected()) {
 			chart = ChartFactory.createXYLineChart("Wykres fali wynikowej", // Tytul
@@ -55,6 +57,29 @@ public class WaveGraph extends JPanel {
 
 		frame1 = new ChartFrame("Chart", chart);
 		frame1.setSize(1400, 600);
+		image = chart.createBufferedImage(500, 500);
 		this.waves = waves;
 	}
+
+	public void setWaves(ArrayList<Wave> waves) {
+		this.waves = waves;
+		
+		XYSeries series = new XYSeries(" f(x) ");
+		double y;
+		for (double x = 0.1; x <= 1000; x++) {
+			y = 0;
+			for (int i = 0; i <= waves.size() - 1; i++) {
+				y += waves.get(i).getAmp() * Math.sin(2 * 3.14 * waves.get(i).getFreq() * x + waves.get(i).getPhase());
+			}
+			series.add(x, y);
+		}
+		dataset.removeAllSeries();
+		dataset.addSeries(series);
+		
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+	
 }

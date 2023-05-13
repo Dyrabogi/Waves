@@ -33,18 +33,18 @@ public class MainFrame extends JFrame {
 		waves = ConfigLoader.readConfig();
 		choices = new ArrayList<String>();
 
-		for (Wave wave : waves) {
-			waveLabel.add(new Label(wave.toString()));
-			waveLabels.add(waveLabel.get(waveIdx));
-			choices.add(String.valueOf(waveIdx + 1));
-			waveIdx++;
-			try {
-				SoundGenerator.generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		;
+//		for (Wave wave : waves) {
+//			waveLabel.add(new Label(wave.toString()));
+//			waveLabels.add(waveLabel.get(waveIdx));
+//			choices.add(String.valueOf(waveIdx + 1));
+//			waveIdx++;
+//			try {
+//				SoundGenerator.generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		;
 		sliderLabels = new JPanel();
 		comboBoxText = new JLabel("Wybierz, parametry którego dźwięku chcesz zmienić");
 		textPanel = new JPanel();

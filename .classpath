@@ -11,5 +11,7 @@
 	<classpathentry kind="lib" path="C:/Users/Michał/Documents/wsjava/Waves/lib/jcommon-1.0.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Michał/Documents/wsjava/Waves/lib/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Michał/Documents/wsjava/Waves/lib/json-20090211.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Documents/wsjava/Waves/lib/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Documents/wsjava/Waves/lib/jsqlparser-0.7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
