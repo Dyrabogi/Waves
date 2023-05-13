@@ -61,11 +61,11 @@ public class WaveGraph extends JPanel {
 			y = 0;
 						
 			for (int i = 0; i <= waves.size() - 1; i++) {
-				double lambda=1/waves.get(i).getFreq();
+				double lambda=Math.sqrt(MediumParameters.getCisnienie())/waves.get(i).getFreq();
 				double 	d=Math.pow(Visualisation.detector.getxPos()-Visualisation.speakers.get(i).getxPos(), 2);
 				d+=Math.pow(Visualisation.detector.getyPos()-Visualisation.speakers.get(i).getyPos(), 2);
 				d=Math.sqrt(d);
-				y += waves.get(i).getAmp() * Math.sin(2 * 3.14 * waves.get(i).getFreq() * x + waves.get(i).getPhase()
+				y += waves.get(i).getAmp()/Math.pow(d, 2) * Math.sin(2 * 3.14 * waves.get(i).getFreq() * x + waves.get(i).getPhase()
 						+2 * 3.14 *d/lambda);
 			}
 			series.add(x, y);

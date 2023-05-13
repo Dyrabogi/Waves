@@ -4,6 +4,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.swing.JScrollPane;  
 
 import javax.swing.*;
 
@@ -86,8 +90,10 @@ public class MainFrame extends JFrame {
 		north.setLayout(new GridLayout(1, 2));
 		rozwijane = new Menu();
 		north.add(rozwijane);
-		north.add(waveLabels);
-	
+		
+        
+		JScrollPane scrollableTextArea = new JScrollPane(waveLabels, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+	    north.add(scrollableTextArea); 
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
 		east.add(tempo);
@@ -97,6 +103,8 @@ public class MainFrame extends JFrame {
 		this.add(east, BorderLayout.EAST);
 		this.add(north, BorderLayout.NORTH);
 		this.add(center, BorderLayout.CENTER);
+		ExecutorService exec = Executors.newFixedThreadPool(2);
+        exec.execute(center);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

@@ -4,11 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class MediumParameters implements ActionListener {
 
+	static double cisnienie;
+	Slider cisSlider;
 	MediumParameters() {
-
+		cisnienie=100;
 	}
 
 	@Override
@@ -26,12 +30,26 @@ public class MediumParameters implements ActionListener {
 			dialog.add(cisnienie);
 			dialog.add(lista);
 		}
-		Slider cisSlider = new Slider(0, 10, 3);
+		cisSlider = new Slider(0, 1000, 100);
+		cisSlider.addChangeListener(slider);
 		JFormattedTextField cisText = new JFormattedTextField();
-
 		dialog.add(cisSlider);
 		dialog.add(cisText);
 		dialog.setSize(300, 300);
 		dialog.setVisible(true);
+	}
+
+	ChangeListener slider=new ChangeListener() {
+
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			cisnienie=cisSlider.getValue();
+			
+		}
+		
+	};
+	public static double getCisnienie() {
+		
+		return cisnienie;
 	}
 }
