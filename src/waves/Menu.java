@@ -25,10 +25,11 @@ public class Menu extends JMenuBar {
 	static JMenu dzwiek, detektor;
 	Random rand;
 	JFileChooser fc = new JFileChooser();
-	
+	SqlConnector soundsDatabase;
 
 	Menu() {
 		super();
+		SqlConnector soundsDatabase = new SqlConnector();
 		rand = new Random();
 		dzwiek = new JMenu("Dodaj źródło dźwięku");
 		this.add(dzwiek);
@@ -48,6 +49,46 @@ public class Menu extends JMenuBar {
 		});
 
 		zListy = new JMenuItem("Z listy");
+		zListy.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialog = new JDialog();
+				dialog.setSize(500, 800);
+				dialog.setLayout(new GridLayout(soundsDatabase.getImportedWaves().size(), 3));
+				for(int j = 0; j < soundsDatabase.getImportedWaves().size();j++) {
+					JLabel soundName = new JLabel(soundsDatabase.getSoundNames().get(j));
+					JLabel soundParameters = new JLabel(soundsDatabase.printParameters(j));
+					JButton okButton = new JButton("Dodaj");
+					okButton.setName(soundsDatabase.getSoundNames().get(j));
+					
+					okButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							int jj = soundsDatabase.getWaveindex(okButton.getName());
+							Wave waveTemp = new Wave(soundsDatabase.getAmp(jj),
+									soundsDatabase.getPhase(jj),soundsDatabase.getFreq(jj));
+							MainFrame.waves.add(waveTemp);
+							
+							MainFrame.waveLabel.add(new Label(waveTemp.toString()));
+							MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
+							MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
+							MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));
+							revalidate();
+							MainFrame.waveIdx++;
+						}
+					
+					});
+					dialog.add(soundName);
+					dialog.add(soundParameters);
+					dialog.add(okButton);
+				}
+				dialog.setVisible(true);
+				
+			}
+		});
+		
 		wlasne = new JMenuItem("Własne parametry");
 		wlasne.addActionListener(new ActionListener() {
 			@Override

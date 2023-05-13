@@ -68,6 +68,26 @@ ArrayList<String> soundNames;
 		
 
 	}
+	
+	public int getWaveindex(String name) {
+		int index = 0;
+		
+		for(String str : soundNames) {
+			if(str == name)
+				return index;
+			else
+				index ++;
+		
+		}
+		return index;
+	}
+	
+	public String printParameters(int i) {
+		String pars = "Amplituda -> " + importedWaves.get(i).getAmp() + ", czestotliwosc -> " 
+				+ importedWaves.get(i).getFreq() + ", faza -> " + importedWaves.get(i).getPhase();
+		return pars;
+	}
+	
 
 	public ArrayList<Wave> getImportedWaves() {
 		return importedWaves;
@@ -77,6 +97,15 @@ ArrayList<String> soundNames;
 		return soundNames;
 	}
 	
+	double getFreq(int i) {
+		return importedWaves.get(i).getFreq();
+	}
+	double getAmp(int i) {
+		return importedWaves.get(i).getAmp();
+	}
+	double getPhase(int i) {
+		return importedWaves.get(i).getPhase();
+	}
 	
 
 
