@@ -43,6 +43,7 @@ public class Menu extends JMenuBar {
 				MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
 				MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
 				MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));
+				MainFrame.center.addSpeaker();
 				revalidate();
 				MainFrame.waveIdx++;
 			}
@@ -75,6 +76,7 @@ public class Menu extends JMenuBar {
 							MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
 							MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
 							MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));
+							MainFrame.center.addSpeaker();
 							revalidate();
 							MainFrame.waveIdx++;
 						}
@@ -99,6 +101,7 @@ public class Menu extends JMenuBar {
 				MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
 				MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
 				MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));
+				MainFrame.center.addSpeaker();
 				revalidate();
 				MainFrame.waveIdx++;
 			}

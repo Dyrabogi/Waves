@@ -20,17 +20,20 @@ public class MainFrame extends JFrame {
 	static ArrayList<Label> waveLabel;
 	static int waveIdx = 0;
 	static ArrayList<String> choices;
+	static Visualisation center;
 
 	MainFrame() throws HeadlessException {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setSize(1280, 720);
-
+		
+		center=new Visualisation();
 		waveLabels = new JPanel();
 		waveLabels.setLayout(new GridLayout(2, 1));
 		waveLabel = new ArrayList<Label>();
-		waves = ConfigLoader.readConfig();
+		waves=new ArrayList<>();
+		//waves = ConfigLoader.readConfig(); // TO DO JAKIEGOS LISTENERA
 		choices = new ArrayList<String>();
 
 //		for (Wave wave : waves) {
@@ -93,6 +96,7 @@ public class MainFrame extends JFrame {
 		this.add(textPanel, BorderLayout.PAGE_END);
 		this.add(east, BorderLayout.EAST);
 		this.add(north, BorderLayout.NORTH);
+		this.add(center, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

@@ -26,16 +26,7 @@ public class WaveGraph extends JPanel {
 	public WaveGraph(ArrayList<Wave> waves) {
 		super();
 		XYSeries series = new XYSeries(" f(x) ");
-		double y;
-		for (double x = 0.1; x <= 1000; x++) {
-			y = 0;
-			for (int i = 0; i <= waves.size() - 1; i++) {
-				y += waves.get(i).getAmp() * Math.sin(2 * 3.14 * waves.get(i).getFreq() * x + waves.get(i).getPhase());
-			}
-			series.add(x, y);
-		}
-//		XYSeriesCollection dataset = new XYSeriesCollection();
-		dataset.addSeries(series);
+		
 		if (MainFrame.polski.isSelected()) {
 			chart = ChartFactory.createXYLineChart("Wykres fali wynikowej", // Tytul
 					"t (s)", // opisy osi
@@ -68,11 +59,18 @@ public class WaveGraph extends JPanel {
 		double y;
 		for (double x = 0.1; x <= 1000; x++) {
 			y = 0;
+						
 			for (int i = 0; i <= waves.size() - 1; i++) {
-				y += waves.get(i).getAmp() * Math.sin(2 * 3.14 * waves.get(i).getFreq() * x + waves.get(i).getPhase());
+				double lambda=1/waves.get(i).getFreq();
+				double 	d=Math.pow(Visualisation.detector.getxPos()-Visualisation.speakers.get(i).getxPos(), 2);
+				d+=Math.pow(Visualisation.detector.getyPos()-Visualisation.speakers.get(i).getyPos(), 2);
+				d=Math.sqrt(d);
+				y += waves.get(i).getAmp() * Math.sin(2 * 3.14 * waves.get(i).getFreq() * x + waves.get(i).getPhase()
+						+2 * 3.14 *d/lambda);
 			}
 			series.add(x, y);
 		}
+		
 		dataset.removeAllSeries();
 		dataset.addSeries(series);
 		
