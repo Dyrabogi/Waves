@@ -10,7 +10,7 @@ import javax.swing.*;
 public class MainFrame extends JFrame {
 	static JButton parametryDziweku, parametryOsrodka;
 	static JRadioButton angielski, polski;
-	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki;
+	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki,labelsPane;
 	static Slider tempoSymulacji;
 	static JLabel tempo, comboBoxText;
 	static JComboBox<String> cb;
@@ -30,6 +30,15 @@ public class MainFrame extends JFrame {
 		
 		center=new Visualisation();
 		waveLabels = new JPanel();
+		JScrollPane scrollPane = new JScrollPane(waveLabels);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBounds(20, 30, 300, 80);
+        scrollPane.setBounds(15,10,300,75);
+        labelsPane = new JPanel(null);
+        labelsPane.setPreferredSize(new Dimension(40,100));
+        labelsPane.add(scrollPane);
+      
 		waveLabels.setLayout(new GridLayout(2, 1));
 		waveLabel = new ArrayList<Label>();
 		waves=new ArrayList<>();
@@ -86,7 +95,7 @@ public class MainFrame extends JFrame {
 		north.setLayout(new GridLayout(1, 3));
 		rozwijane = new Menu();
 		north.add(rozwijane);
-		north.add(waveLabels);
+		north.add(labelsPane);
 		east.add(sliderLabels);
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
@@ -99,6 +108,8 @@ public class MainFrame extends JFrame {
 		this.add(center, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
+		this.setSize(1280, 720);
 	}
 
 //		public static void main(String[] args) {

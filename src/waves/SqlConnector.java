@@ -31,10 +31,7 @@ ArrayList<String> soundNames;
 					
 			importedWaves = new ArrayList();
 			soundNames = new ArrayList();
-			for (int ii = 1; ii <= md.getColumnCount(); ii++){
-				System.out.print(md.getColumnName(ii)+ " | ");						
-				
-			}
+		
 			System.out.println();
 			int tr;
 			int j = 0;
@@ -48,10 +45,7 @@ ArrayList<String> soundNames;
 						j++;
 				
 			}
-			for(int jj = 0 ;jj<importedWaves.size(); jj++) {
-				System.out.println(soundNames.get(jj) + " -> czestotliwosc:" + importedWaves.get(jj).getFreq() );
 
-			}
 			
 		} catch (SQLException e) {
 			
