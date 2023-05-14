@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
 		group.add(polski);
 		polski.setSelected(true);
 		tempo = new JLabel("Tempo Symulacji");
-		tempoSymulacji = new Slider(0, 100, 20);
+		tempoSymulacji = new Slider(0, 10, 3);
 		tempoSymulacji.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				for(Speaker s: center.speakers)

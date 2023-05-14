@@ -46,14 +46,11 @@ Speaker(){
 	    nrSpeakers++;
 }
 void setSpeed(int i) {
-	if(i==0)
-		speed=0;
-	else
-		speed=100/i;
+	speed=i;
 }
 
 public void draw(Graphics g2d) {
-    g2d.drawImage(glosnik, xPos, yPos, MainFrame.center);
+  
     for (Circle crr:animation) {
     	if(crr.getRadius()>1270)
     		animation.remove(crr);
@@ -65,6 +62,7 @@ public void draw(Graphics g2d) {
     c.setRadius(70);
     c.setOrigin(xPos/2+xWidth/2, yPos/2+yWidth/2);
     animation.add(c);
+    g2d.drawImage(glosnik, xPos, yPos, MainFrame.center);
     }
     	
 public int getyPos() {
@@ -107,13 +105,13 @@ public void run() {
 	while(true){
 		{
 			  for (Circle cr : animation) {
-              cr.setRadius(cr.getRadius()+2);
+              cr.setRadius(cr.getRadius()+speed);
               cr.setColor(cr.getRadius()); 
           } 
 			  MainFrame.center.repaint(); 
 			  }     
         try {
-            Thread.sleep(speed);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
