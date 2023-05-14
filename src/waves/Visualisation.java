@@ -38,10 +38,10 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 	
 	public void paintComponent(Graphics g) {
 	       super.paintComponent(g);
-	        detector.draw(g);
 	        for(Speaker i:speakers) {
 	        	i.draw(g);
 	        	}
+	        detector.draw(g);
 	        }
 	
 	void addSpeaker() {
