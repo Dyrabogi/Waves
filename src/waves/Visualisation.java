@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-public class Visualisation extends JPanel implements MouseMotionListener, Runnable{
+public class Visualisation extends JPanel implements MouseMotionListener{
 	static Detector detector;
 	static ArrayList <Speaker> speakers;
 	int doZmiany, podniesienieX, podniesienieY;
@@ -32,8 +32,6 @@ public class Visualisation extends JPanel implements MouseMotionListener, Runnab
 	 this.addMouseListener(myMouseListener);
 	 this.addMouseMotionListener(this);
      repaint();
-     Thread t = new Thread(this);
-     t.start();
      setVisible(true);
 	}
 	
@@ -43,17 +41,16 @@ public class Visualisation extends JPanel implements MouseMotionListener, Runnab
 	        detector.draw(g);
 	        for(Speaker i:speakers) {
 	        	i.draw(g);
-	        	for(Circle c: i.animation) {
-	        		Graphics2D g2d=(Graphics2D) g;
-	        		c.draw(g2d);
 	        	}
-	        		
 	        }
-	    }
 	
 	void addSpeaker() {
 		Speaker speak=new Speaker();
 		speakers.add(speak);
+		 ExecutorService exec = Executors.newFixedThreadPool(10);
+	        for (int i=0; i<speakers.size(); i++) {
+	                exec.execute(speakers.get(i));
+	            }
 		repaint();
 	}
 	
@@ -133,47 +130,5 @@ public class Visualisation extends JPanel implements MouseMotionListener, Runnab
 	}
 	
 
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	ActionListener changeAction=new ActionListener() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	};
-
-public void run() {
-		
-		int x=70;
-		while(true){
-			  for(Speaker s:speakers) {
-				  for (Circle cr : s.animation) {
-				
-                  cr.setRadius(x);
-                  double dx=(double) x;
-                  cr.setColor(dx);
-                  x+=1;
-                  revalidate();
-                  repaint();
-              }
-				  revalidate();
-                  repaint();
-				  x=70;
-			  }
-              
-             
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-    }
-		
-	}
+	public void mouseMoved(MouseEvent e) {}
 }

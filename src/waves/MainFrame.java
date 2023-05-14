@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class MainFrame extends JFrame {
 	static JButton parametryDziweku, parametryOsrodka;
@@ -75,7 +77,14 @@ public class MainFrame extends JFrame {
 		group.add(polski);
 		polski.setSelected(true);
 		tempo = new JLabel("Tempo Symulacji");
-		tempoSymulacji = new Slider(0, 10, 3);
+		tempoSymulacji = new Slider(0, 100, 20);
+		tempoSymulacji.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				for(Speaker s: center.speakers)
+					s.setSpeed(tempoSymulacji.getValue());
+			}
+			
+		});
 
 		String[] arr = choices.toArray(new String[0]);
 
@@ -91,12 +100,12 @@ public class MainFrame extends JFrame {
 		jezyki.setLayout(new GridLayout(1, 2));
 		jezyki.add(angielski);
 		jezyki.add(polski);
-		east.setLayout(new GridLayout(6, 1));
+		east.setLayout(new GridLayout(5, 1));
 		north.setLayout(new GridLayout(1, 3));
 		rozwijane = new Menu();
 		north.add(rozwijane);
 		north.add(labelsPane);
-		east.add(sliderLabels);
+		//east.add(sliderLabels);
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
 		east.add(tempo);
