@@ -2,45 +2,54 @@ package waves;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.util.List;
 
 public class Circle {
 
 		protected int x;
 	    protected int y;
-	    protected int radius;
+	    protected double radius;
 	    protected Color color;
 	    protected int i;
-	    Circle(){
-
+	    protected Paint paint;
+	    public Circle(int i){
+	    	this.i=i;
 	    }
 	    
 	    public void setOrigin(int x, int y) {
 	    	this.x=x;
 	    	this.y=y;
 	    }
-	    public void setRadius(int d) {
+	    public void setRadius(double d) {
 	    	this.radius=d;
 	    }
-	    public void setColor(int x) {
+	    public void setColor(double x) {
 	    	double amp=0;	    	
 	    	double lambda=Math.sqrt(MediumParameters.getCisnienie())/MainFrame.waves.get(i).getFreq();
-			double 	d=Math.pow(Visualisation.detector.getxPos()-Visualisation.speakers.get(i).getxPos(), 2);
-			d+=Math.pow(Visualisation.detector.getyPos()-Visualisation.speakers.get(i).getyPos(), 2);
-			d=Math.sqrt(d);
-			amp=MainFrame.waves.get(i).getAmp()/Math.pow(d, 2) * Math.sin(2 * 3.14 * MainFrame.waves.get(i).getFreq() * x + MainFrame.waves.get(i).getPhase()
-					+2 * 3.14 *d/lambda)+ MainFrame.waves.get(i).getAmp();
+			double 	d=radius;
+			amp= Math.sin(MainFrame.waves.get(i).getFreq()*x+MainFrame.waves.get(i).getPhase())+1;
 
-			float famp=(float) amp/255;
+			//paint = new GradientPaint(0, 0, Color.blue, 200, 200, Color.red, true); //WERSJA BARDZO UPROSZCZONA
+			amp=amp/2;
+			float famp=(float) amp;
 			float a=(float) 0.5;
-	    	color=new Color(famp, famp, famp, a);
+			if(famp<0.33)
+				color=new Color(famp, famp/2, famp/3, a);
+			else if(famp<0.66)
+				color=new Color(0, 0, famp, a);
+			else
+				color=new Color(0, famp, 0, a);
 	    }
 	
-	public void draw(Graphics g2d) {
+	public void draw(Graphics2D g2d) {
 		
         g2d.setColor(color);
-        g2d.drawOval(x-radius/2, y-radius/2, radius, radius);
+        //g2d.setPaint(paint);
+        int iradius=(int) radius;
+        g2d.drawOval(x-iradius/2, y-iradius/2, iradius, iradius);
     }
 }

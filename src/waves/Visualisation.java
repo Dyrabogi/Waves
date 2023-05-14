@@ -1,7 +1,10 @@
 package waves;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -29,6 +32,8 @@ public class Visualisation extends JPanel implements MouseMotionListener, Runnab
 	 this.addMouseListener(myMouseListener);
 	 this.addMouseMotionListener(this);
      repaint();
+     Thread t = new Thread(this);
+     t.start();
      setVisible(true);
 	}
 	
@@ -38,8 +43,11 @@ public class Visualisation extends JPanel implements MouseMotionListener, Runnab
 	        detector.draw(g);
 	        for(Speaker i:speakers) {
 	        	i.draw(g);
-	        	for(Circle c: i.animation)
-	        		c.draw(g);
+	        	for(Circle c: i.animation) {
+	        		Graphics2D g2d=(Graphics2D) g;
+	        		c.draw(g2d);
+	        	}
+	        		
 	        }
 	    }
 	
@@ -47,8 +55,6 @@ public class Visualisation extends JPanel implements MouseMotionListener, Runnab
 		Speaker speak=new Speaker();
 		speakers.add(speak);
 		repaint();
-		//ExecutorService exec = Executors.newFixedThreadPool(2);
-        //exec.execute(this);
 	}
 	
 	 MouseListener myMouseListener=new MouseListener() {
@@ -142,16 +148,16 @@ public class Visualisation extends JPanel implements MouseMotionListener, Runnab
 	};
 
 public void run() {
-
-		boolean czynny=true;
+		
 		int x=70;
-		  while(czynny){
+		while(true){
 			  for(Speaker s:speakers) {
 				  for (Circle cr : s.animation) {
 				
                   cr.setRadius(x);
-                  cr.setColor(x);
-                  x+=15;
+                  double dx=(double) x;
+                  cr.setColor(dx);
+                  x+=1;
                   revalidate();
                   repaint();
               }

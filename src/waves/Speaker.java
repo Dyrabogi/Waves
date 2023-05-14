@@ -15,6 +15,7 @@ static BufferedImage glosnik;
 private int xPos, yPos;
 private int xWidth, yWidth;
 ArrayList <Circle> animation;
+static int nrSpeakers=0;
 Speaker(){
 	animation=new ArrayList<Circle>();
 	
@@ -31,11 +32,12 @@ Speaker(){
     xWidth=xPos+glosnik.getWidth();
     yWidth=yPos+glosnik.getHeight();
     
-    for(int i=0; i<500; i++) {
-		Circle c=new Circle();
+    for(int i=0; i<1500; i++) {
+		Circle c=new Circle(nrSpeakers);
 		c.setOrigin(xPos/2+xWidth/2, yPos/2+yWidth/2);
 		animation.add(c);
 	}
+    nrSpeakers++;
 }
 
 public void draw(Graphics g2d) {
