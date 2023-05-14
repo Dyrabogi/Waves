@@ -4,17 +4,13 @@ import java.awt.*;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.swing.JScrollPane;  
 
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
 	static JButton parametryDziweku, parametryOsrodka;
 	static JRadioButton angielski, polski;
-	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki;
+	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki,labelsPane;
 	static Slider tempoSymulacji;
 	static JLabel tempo, comboBoxText;
 	static JComboBox<String> cb;
@@ -34,6 +30,15 @@ public class MainFrame extends JFrame {
 		
 		center=new Visualisation();
 		waveLabels = new JPanel();
+		JScrollPane scrollPane = new JScrollPane(waveLabels);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBounds(20, 30, 300, 80);
+        scrollPane.setBounds(15,10,300,75);
+        labelsPane = new JPanel(null);
+        labelsPane.setPreferredSize(new Dimension(40,100));
+        labelsPane.add(scrollPane);
+      
 		waveLabels.setLayout(new GridLayout(2, 1));
 		waveLabel = new ArrayList<Label>();
 		waves=new ArrayList<>();
@@ -52,7 +57,7 @@ public class MainFrame extends JFrame {
 //			}
 //		}
 //		;
-		
+		sliderLabels = new JPanel();
 		comboBoxText = new JLabel("Wybierz, parametry którego dźwięku chcesz zmienić");
 		textPanel = new JPanel();
 		textPanel.setSize(100, 100);
@@ -86,14 +91,12 @@ public class MainFrame extends JFrame {
 		jezyki.setLayout(new GridLayout(1, 2));
 		jezyki.add(angielski);
 		jezyki.add(polski);
-		east.setLayout(new GridLayout(5, 1));
-		north.setLayout(new GridLayout(1, 2));
+		east.setLayout(new GridLayout(6, 1));
+		north.setLayout(new GridLayout(1, 3));
 		rozwijane = new Menu();
 		north.add(rozwijane);
-		
-        
-		JScrollPane scrollableTextArea = new JScrollPane(waveLabels, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
-	    north.add(scrollableTextArea); 
+		north.add(labelsPane);
+		east.add(sliderLabels);
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
 		east.add(tempo);
@@ -103,10 +106,10 @@ public class MainFrame extends JFrame {
 		this.add(east, BorderLayout.EAST);
 		this.add(north, BorderLayout.NORTH);
 		this.add(center, BorderLayout.CENTER);
-		ExecutorService exec = Executors.newFixedThreadPool(2);
-        exec.execute(center);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
+		this.setSize(1280, 720);
 	}
 
 //		public static void main(String[] args) {
