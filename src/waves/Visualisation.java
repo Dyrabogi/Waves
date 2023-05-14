@@ -7,18 +7,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.awt.*;  
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-public class Visualisation extends JPanel implements MouseMotionListener{
+public class Visualisation extends JPanel implements MouseMotionListener, Runnable{
 	static Detector detector;
 	static ArrayList <Speaker> speakers;
 	int doZmiany, podniesienieX, podniesienieY;
@@ -34,18 +31,25 @@ public class Visualisation extends JPanel implements MouseMotionListener{
      repaint();
      setVisible(true);
 	}
-	void addSpeaker() {
-		Speaker speak=new Speaker();
-		speakers.add(speak);
-		repaint();
-	}
+	
 	
 	public void paintComponent(Graphics g) {
 	       super.paintComponent(g);
 	        detector.draw(g);
-	        for(Speaker i:speakers)
+	        for(Speaker i:speakers) {
 	        	i.draw(g);
+	        	for(Circle c: i.animation)
+	        		c.draw(g);
+	        }
 	    }
+	
+	void addSpeaker() {
+		Speaker speak=new Speaker();
+		speakers.add(speak);
+		repaint();
+		//ExecutorService exec = Executors.newFixedThreadPool(2);
+        //exec.execute(this);
+	}
 	
 	 MouseListener myMouseListener=new MouseListener() {
 	 public void mousePressed(MouseEvent e) {
@@ -77,12 +81,24 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 				 if(e.getX()>=Visualisation.speakers.get(i).getxPos() && e.getX()<=Visualisation.speakers.get(i).getxWidth()
 						 && e.getY()>=Visualisation.speakers.get(i).getyPos() && e.getY()<=Visualisation.speakers.get(i).getyWidth()) {
 	
-			JPopupMenu popupmenu = new JPopupMenu("Zmień źódło dźwięku");   
-	         JMenuItem change = new JMenuItem("Zmień parametry");
+					 if(MainFrame.angielski.isSelected()) {
+						 JPopupMenu popupmenu = new JPopupMenu("Change parameters");   
+				         JMenuItem change = new JMenuItem("Change parameters of sound "+ (i+1));
+				         MainFrame.cb.setSelectedIndex(i);
+				         change.addActionListener(new SoundParameters());
+				         popupmenu.add(change);   
+				         popupmenu.show(MainFrame.center, e.getX(), e.getY()); 
+					 }
+					 else {
+						 JPopupMenu popupmenu = new JPopupMenu("Zmień źódło dźwięku");   
+	         JMenuItem change = new JMenuItem("Zmień parametry dźwięku "+ (i+1));
 	         MainFrame.cb.setSelectedIndex(i);
 	         change.addActionListener(new SoundParameters());
 	         popupmenu.add(change);   
 	         popupmenu.show(MainFrame.center, e.getX(), e.getY()); 
+					 }
+			
+	         
 	         
 	}}}}
 	public void mouseEntered(MouseEvent e) {}
@@ -96,12 +112,14 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 			speakers.get(doZmiany).setyPos(e.getY()-podniesienieY);
 			speakers.get(doZmiany).setxWidth();
 			speakers.get(doZmiany).setyWidth();
+			this.revalidate();
 			this.repaint();}
 			else {
 				detector.setxPos(e.getX()-podniesienieX);
 				detector.setyPos(e.getY()-podniesienieY);
 				detector.setxWidth();
 				detector.setyWidth();
+				this.revalidate();
 				this.repaint();
 			}
 				
@@ -122,4 +140,34 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 		}
 		
 	};
+
+public void run() {
+
+		boolean czynny=true;
+		int x=70;
+		  while(czynny){
+			  for(Speaker s:speakers) {
+				  for (Circle cr : s.animation) {
+				
+                  cr.setRadius(x);
+                  cr.setColor(x);
+                  x+=15;
+                  revalidate();
+                  repaint();
+              }
+				  revalidate();
+                  repaint();
+				  x=70;
+			  }
+              
+             
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+    }
+		
+	}
 }
