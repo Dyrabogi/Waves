@@ -1,6 +1,8 @@
 package waves;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -100,7 +102,7 @@ public class MainFrame extends JFrame {
 		jezyki.setLayout(new GridLayout(1, 2));
 		jezyki.add(angielski);
 		jezyki.add(polski);
-		east.setLayout(new GridLayout(5, 1));
+		east.setLayout(new GridLayout(6, 1));
 		north.setLayout(new GridLayout(1, 3));
 		rozwijane = new Menu();
 		north.add(rozwijane);
@@ -108,6 +110,39 @@ public class MainFrame extends JFrame {
 		//east.add(sliderLabels);
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
+		JPanel densityPanel = new JPanel();
+		JButton lowDensity = new JButton("Mala gestosc");
+		lowDensity.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				center.changeCircleDensity(7);
+				
+			}
+		});
+		
+		JButton midDensity = new JButton("Srednia gestosc");
+		midDensity.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				center.changeCircleDensity(4);
+				
+			}
+		});
+		JButton highDensity = new JButton("Duza gestosc");
+		highDensity.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				center.changeCircleDensity(1);
+				
+			}
+		});
+		densityPanel.add(lowDensity);
+		densityPanel.add(midDensity);
+		densityPanel.add(highDensity);
+		east.add(densityPanel);
 		east.add(tempo);
 		east.add(tempoSymulacji);
 		east.add(jezyki);

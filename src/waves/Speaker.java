@@ -21,6 +21,7 @@ public class Speaker implements Runnable{
 	static int nrSpeakers=0;
 	private int whichSpeaker;
 	static int speed;
+	static int circleDensity = 1;
 Speaker(){
 		animation=new CopyOnWriteArrayList<Circle>();
 		 File inputFile = new File("glosnik.png");
@@ -100,12 +101,16 @@ public void setyWidth() {
 	this.yWidth = yPos+glosnik.getHeight();
 }
 
+public void setCircleDensity(int i) {
+	circleDensity = i;
+}
+
 @Override
 public void run() {
 	while(true){
 		{
 			  for (Circle cr : animation) {
-              cr.setRadius(cr.getRadius()+speed);
+              cr.setRadius(cr.getRadius()+circleDensity*speed);
               cr.setColor(cr.getRadius()); 
           } 
 			  MainFrame.center.repaint(); 

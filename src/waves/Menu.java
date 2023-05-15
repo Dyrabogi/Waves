@@ -39,7 +39,7 @@ public class Menu extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				Wave waveTemp = new Wave(rand.nextInt(100), rand.nextInt(100), rand.nextInt(100));
 				MainFrame.waves.add(waveTemp);
-				MainFrame.waveLabel.add(new Label(waveTemp.toString()));
+				MainFrame.waveLabel.add(new Label((MainFrame.waveIdx +1)+". " + waveTemp.toString()));
 				MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
 				MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
 				MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));
@@ -72,7 +72,7 @@ public class Menu extends JMenuBar {
 									soundsDatabase.getPhase(jj),soundsDatabase.getFreq(jj));
 							MainFrame.waves.add(waveTemp);
 							
-							MainFrame.waveLabel.add(new Label(waveTemp.toString()));
+							MainFrame.waveLabel.add(new Label((MainFrame.waveIdx +1)+". " + waveTemp.toString()));
 							MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
 							MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
 							MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));
@@ -97,7 +97,7 @@ public class Menu extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				Wave waveTemp = new Wave(0, 0, 0);
 				MainFrame.waves.add(waveTemp);
-				MainFrame.waveLabel.add(new Label(waveTemp.toString()));
+				MainFrame.waveLabel.add(new Label((MainFrame.waveIdx +1) +". " + waveTemp.toString()));
 				MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
 				MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
 				MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));

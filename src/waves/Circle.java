@@ -30,7 +30,9 @@ public class Circle {
 	    public double getRadius() {
 	    	return this.radius;
 	    }
+	    
 	    public void setColor(double x) {
+	    	
 	    	double amp=0;	    	
 			amp= Math.sin(MainFrame.waves.get(i).getFreq()*x+MainFrame.waves.get(i).getPhase())+1;
 			amp=amp/2;

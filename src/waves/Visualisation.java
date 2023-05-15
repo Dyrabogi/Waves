@@ -53,6 +53,11 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 	            }
 		repaint();
 	}
+	public void changeCircleDensity(int i) {
+		for(Speaker j:speakers) {
+        	j.setCircleDensity(i);
+        	}
+	}
 	
 	 MouseListener myMouseListener=new MouseListener() {
 	 public void mousePressed(MouseEvent e) {
