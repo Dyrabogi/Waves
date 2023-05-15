@@ -1,13 +1,14 @@
 package waves;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import javax.swing.SwingUtilities;
 
 public class Main {
 
 	public static void main(String[] args) {
+		 SwingUtilities.invokeLater(new Runnable(){
+	                    public void run() {
 		MainFrame frame = new MainFrame();
 		frame.setVisible(true);
+	}});
+	
 	}
-
-}
+	}

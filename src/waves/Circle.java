@@ -2,11 +2,8 @@ package waves;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.util.List;
+
 
 public class Circle {
 
@@ -46,9 +43,10 @@ public class Circle {
 				color=new Color(0, famp, 0, a);
 	    }
 	
-	public void draw(Graphics g2d) {
+	public void draw(Graphics2D g2d) {
 		
         g2d.setColor(color);
+        g2d.setStroke(new BasicStroke(5));
         int iradius=(int) radius;
         g2d.drawOval(x-iradius/2, y-iradius/2, iradius, iradius);
     }

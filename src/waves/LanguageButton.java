@@ -14,6 +14,7 @@ public class LanguageButton implements ActionListener {
 			Menu.odtworz.setText("Play the sound");
 			Menu.pokaz.setText("Show the wave graph");
 			Menu.wlasne.setText("Select parameters");
+			Menu.json.setText("Add sound source from json file");
 			Menu.zapisz.setText("Save the graph");
 			Menu.zListy.setText("Select from the list");
 			Menu.detektor.setText("Detector");

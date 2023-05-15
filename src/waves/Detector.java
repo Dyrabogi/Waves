@@ -1,13 +1,11 @@
 package waves;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
 
 public class Detector {
 private BufferedImage detektor;
@@ -22,7 +20,7 @@ Detector(){
      } catch(IOException ex) {
          System.out.println(ex.getMessage());
      }
-     xPos=1000;
+     xPos=800;
      yPos=300;
      this.setxWidth();
      this.setyWidth();

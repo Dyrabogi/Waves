@@ -7,21 +7,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.Charset;
 import java.util.Random;
 
 import static waves.WaveGraph.*;
 
 public class Menu extends JMenuBar {
 
-	static JMenuItem losowo, zListy, wlasne, nagraj, odtworz, pokaz, zapisz;
+	static JMenuItem losowo, zListy, wlasne, nagraj, odtworz, pokaz, zapisz, json;
 	static JMenu dzwiek, detektor;
 	Random rand;
 	JFileChooser fc = new JFileChooser();
@@ -106,9 +100,28 @@ public class Menu extends JMenuBar {
 				MainFrame.waveIdx++;
 			}
 		});
+		
+		json=new JMenuItem("Wczytaj z pliku json");
+		json.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.waves = ConfigLoader.readConfig(); 
+				for(Wave w:MainFrame.waves) {
+				MainFrame.waveLabel.add(new Label((MainFrame.waveIdx +1) +". " + w.toString()));
+				MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
+				MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
+				MainFrame.cb.addItem(String.valueOf(MainFrame.waveIdx + 1));
+				MainFrame.center.addSpeaker();
+				MainFrame.waveIdx++;
+				}
+						
+				
+				revalidate();
+			}});
+		
 		dzwiek.add(losowo);
 		dzwiek.add(zListy);
 		dzwiek.add(wlasne);
+		dzwiek.add(json);
 
 		detektor = new JMenu("Detektor");
 		nagraj = new JMenuItem("Nagraj dźwięk");

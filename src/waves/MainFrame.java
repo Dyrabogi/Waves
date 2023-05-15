@@ -3,8 +3,6 @@ package waves;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -37,8 +35,7 @@ public class MainFrame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(waveLabels);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBounds(20, 30, 300, 80);
-        scrollPane.setBounds(15,10,300,75);
+        scrollPane.setBounds(15,10,600,75);
         labelsPane = new JPanel(null);
         labelsPane.setPreferredSize(new Dimension(40,100));
         labelsPane.add(scrollPane);
@@ -46,7 +43,6 @@ public class MainFrame extends JFrame {
 		waveLabels.setLayout(new GridLayout(2, 1));
 		waveLabel = new ArrayList<Label>();
 		waves=new ArrayList<>();
-		//waves = ConfigLoader.readConfig(); // TO DO JAKIEGOS LISTENERA
 		choices = new ArrayList<String>();
 
 //		for (Wave wave : waves) {
@@ -61,7 +57,6 @@ public class MainFrame extends JFrame {
 //			}
 //		}
 //		;
-		sliderLabels = new JPanel();
 		comboBoxText = new JLabel("Wybierz, parametry którego dźwięku chcesz zmienić");
 		textPanel = new JPanel();
 		textPanel.setSize(100, 100);
@@ -79,7 +74,8 @@ public class MainFrame extends JFrame {
 		group.add(polski);
 		polski.setSelected(true);
 		tempo = new JLabel("Tempo Symulacji");
-		tempoSymulacji = new Slider(0, 10, 3);
+		tempoSymulacji = new Slider(0, 100, 25);
+		tempoSymulacji.setMinimum(10);
 		tempoSymulacji.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				for(Speaker s: center.speakers)
@@ -107,7 +103,6 @@ public class MainFrame extends JFrame {
 		rozwijane = new Menu();
 		north.add(rozwijane);
 		north.add(labelsPane);
-		//east.add(sliderLabels);
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
 		JPanel densityPanel = new JPanel();

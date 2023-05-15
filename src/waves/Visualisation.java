@@ -1,12 +1,7 @@
 package waves;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -38,10 +33,10 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 	
 	public void paintComponent(Graphics g) {
 	       super.paintComponent(g);
+	       detector.draw(g);
 	        for(Speaker i:speakers) {
 	        	i.draw(g);
 	        	}
-	        detector.draw(g);
 	        }
 	
 	void addSpeaker() {

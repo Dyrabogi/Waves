@@ -6,7 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.io.*;
+import javax.swing.JFileChooser;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -29,10 +30,15 @@ public class ConfigLoader {
 	public static ArrayList<Wave> readConfig() {
 
 		try {
-			Path path = Paths.get("config.json");
+			JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Wybierz plik");
+            int result = chooser.showDialog(null, "Wybierz");
+            File inputFile = new File(chooser.getSelectedFile().toURI());
+            
+			//Path path = Paths.get("config.json");
+            Path path=Paths.get(inputFile.toURI());
 			Gson g = new Gson();
 			String raw = Files.readString(path);
-
 			Config config = g.fromJson(raw, Config.class);
 			return config.getWavesList();
 		} catch (IOException | JsonSyntaxException e) {

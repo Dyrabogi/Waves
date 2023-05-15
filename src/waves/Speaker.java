@@ -5,9 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.ImageIO;
@@ -32,7 +29,7 @@ Speaker(){
 	     }
 	    xPos=100;
 	    yPos=300;
-	    speed=10;
+	    speed=100;
 	    
 	    xWidth=xPos+glosnik.getWidth();
 	    yWidth=yPos+glosnik.getHeight();
@@ -47,7 +44,10 @@ Speaker(){
 	    nrSpeakers++;
 }
 void setSpeed(int i) {
-	speed=i;
+	if(i==0)
+		speed=0;
+	else
+		speed=1000/i;
 }
 
 public void draw(Graphics g2d) {
@@ -57,7 +57,8 @@ public void draw(Graphics g2d) {
     		animation.remove(crr);
     }
     for(Circle cr:animation) {
-    	cr.draw(g2d);
+    	Graphics2D g2=(Graphics2D) g2d;
+    	cr.draw(g2);
     }
     Circle c=new Circle(whichSpeaker);
     c.setRadius(70);
@@ -110,16 +111,20 @@ public void run() {
 	while(true){
 		{
 			  for (Circle cr : animation) {
-              cr.setRadius(cr.getRadius()+circleDensity*speed);
+              cr.setRadius(cr.getRadius()+circleDensity*10);
               cr.setColor(cr.getRadius()); 
           } 
 			  MainFrame.center.repaint(); 
 			  }     
         try {
-            Thread.sleep(10);
+        	
+            Thread.sleep(speed);
+            
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-}}
+        }	
+}
+
+}
 	
 }
