@@ -10,7 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class MainFrame extends JFrame {
-	static JButton parametryDziweku, parametryOsrodka;
+	static JButton parametryDziweku, parametryOsrodka, lowDensity, highDensity, midDensity;
 	static JRadioButton angielski, polski;
 	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki,labelsPane;
 	static Slider tempoSymulacji;
@@ -106,7 +106,7 @@ public class MainFrame extends JFrame {
 		east.add(parametryDziweku);
 		east.add(parametryOsrodka);
 		JPanel densityPanel = new JPanel();
-		JButton lowDensity = new JButton("Mala gestosc");
+		lowDensity = new JButton("Mala gestosc");
 		lowDensity.addActionListener(new ActionListener() {
 			
 			@Override
@@ -116,7 +116,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton midDensity = new JButton("Srednia gestosc");
+		midDensity = new JButton("Srednia gestosc");
 		midDensity.addActionListener(new ActionListener() {
 			
 			@Override
@@ -125,7 +125,7 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-		JButton highDensity = new JButton("Duza gestosc");
+		highDensity = new JButton("Duza gestosc");
 		highDensity.addActionListener(new ActionListener() {
 			
 			@Override

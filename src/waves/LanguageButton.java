@@ -18,6 +18,9 @@ public class LanguageButton implements ActionListener {
 			Menu.zapisz.setText("Save the graph");
 			Menu.zListy.setText("Select from the list");
 			Menu.detektor.setText("Detector");
+			MainFrame.highDensity.setText("High Density");
+			MainFrame.lowDensity.setText("Low Density");
+			MainFrame.midDensity.setText("Medium Density");
 			MainFrame.comboBoxText.setText("Choose which sound parameters you want to change");
 			MainFrame.polski.setText("Polish");
 			MainFrame.angielski.setText("English");
@@ -36,6 +39,9 @@ public class LanguageButton implements ActionListener {
 			Menu.zapisz.setText("Zapisz wykres");
 			Menu.zListy.setText("Wybierz z listy");
 			Menu.detektor.setText("Detektor");
+			MainFrame.highDensity.setText("Duża gęstość");
+			MainFrame.lowDensity.setText("Mała gęstość");
+			MainFrame.midDensity.setText("Średnia gęstość");
 			MainFrame.comboBoxText.setText("Wybierz, parametry którego dźwięku chcesz zmienić");
 			MainFrame.polski.setText("polski");
 			MainFrame.angielski.setText("angielski");

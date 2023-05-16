@@ -3,7 +3,7 @@ package waves;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -104,8 +104,12 @@ public class Menu extends JMenuBar {
 		json=new JMenuItem("Wczytaj z pliku json");
 		json.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.waves = ConfigLoader.readConfig(); 
-				for(Wave w:MainFrame.waves) {
+				ArrayList <Wave> json=new ArrayList<>();
+				json=ConfigLoader.readConfig();
+				for(Wave wa:json)
+					MainFrame.waves.add(wa) ;
+	
+				for(Wave w: json) {
 				MainFrame.waveLabel.add(new Label((MainFrame.waveIdx +1) +". " + w.toString()));
 				MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));
 				MainFrame.waveLabels.add(MainFrame.waveLabel.get(MainFrame.waveIdx));
