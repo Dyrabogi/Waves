@@ -100,13 +100,13 @@ public class MainFrame extends JFrame {
 		graph = new WaveGraph(MainFrame.waves);
 		wykres=new GraphPanel();
 		east.add(graph.panel);
+		System.out.println(graph.panel.getPreferredSize());
+		graph.panel.setPreferredSize(new Dimension(340, 210));
 		east.add(parametry);
 		east.add(labelsPane);
 		JPanel densityPanel = new JPanel();
 		lowDensity = new JButton("Mała gęstość");
 		lowDensity.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				center.changeCircleDensity(7);
 				
@@ -115,8 +115,6 @@ public class MainFrame extends JFrame {
 		
 		midDensity = new JButton("Średnia gęstość");
 		midDensity.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				center.changeCircleDensity(4);
 				
@@ -124,8 +122,6 @@ public class MainFrame extends JFrame {
 		});
 		highDensity = new JButton("Duża gęstość");
 		highDensity.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				center.changeCircleDensity(1);
 				
