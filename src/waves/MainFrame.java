@@ -24,7 +24,6 @@ public class MainFrame extends JFrame {
 	static int waveIdx = 0;
 	static ArrayList<String> choices;
 	static Visualisation center;
-	private GraphPanel wykres;
 	
 	MainFrame() throws HeadlessException {
 
@@ -98,9 +97,7 @@ public class MainFrame extends JFrame {
 		parametry.add(parametryOsrodka);
 		
 		graph = new WaveGraph(MainFrame.waves);
-		wykres=new GraphPanel();
 		east.add(graph.panel);
-		System.out.println(graph.panel.getPreferredSize());
 		graph.panel.setPreferredSize(new Dimension(340, 210));
 		east.add(parametry);
 		east.add(labelsPane);
