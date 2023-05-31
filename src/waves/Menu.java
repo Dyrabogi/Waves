@@ -15,7 +15,7 @@ import static waves.WaveGraph.*;
 
 public class Menu extends JMenuBar {
 
-	static JMenuItem losowo, zListy, wlasne, nagraj, odtworz, pokaz, zapisz, json;
+	static JMenuItem losowo, zListy, wlasne, nagraj, odtworz, pokaz, zapisz, json  ;
 	static JMenu dzwiek, detektor;
 	Random rand;
 	JFileChooser fc = new JFileChooser();
@@ -40,6 +40,8 @@ public class Menu extends JMenuBar {
 				MainFrame.center.addSpeaker();
 				revalidate();
 				MainFrame.waveIdx++;
+				MainFrame.graph.setWaves(MainFrame.waves);
+				MainFrame.graph.repaint();
 			}
 		});
 
@@ -73,6 +75,8 @@ public class Menu extends JMenuBar {
 							MainFrame.center.addSpeaker();
 							revalidate();
 							MainFrame.waveIdx++;
+							MainFrame.graph.setWaves(MainFrame.waves);
+							MainFrame.graph.repaint();
 						}
 					
 					});
@@ -80,7 +84,9 @@ public class Menu extends JMenuBar {
 					dialog.add(soundParameters);
 					dialog.add(okButton);
 				}
+				
 				dialog.setVisible(true);
+				
 				
 			}
 		});
@@ -98,6 +104,8 @@ public class Menu extends JMenuBar {
 				MainFrame.center.addSpeaker();
 				revalidate();
 				MainFrame.waveIdx++;
+				MainFrame.graph.setWaves(MainFrame.waves);
+				MainFrame.graph.repaint();
 			}
 		});
 		
@@ -117,8 +125,8 @@ public class Menu extends JMenuBar {
 				MainFrame.center.addSpeaker();
 				MainFrame.waveIdx++;
 				}
-						
-				
+				MainFrame.graph.setWaves(MainFrame.waves);
+				MainFrame.graph.repaint();
 				revalidate();
 			}});
 		
@@ -173,6 +181,7 @@ public class Menu extends JMenuBar {
 			}});
 		
 		detektor.add(zapisz);
+
 		this.add(detektor);
 	}}
 	

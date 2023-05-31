@@ -19,6 +19,7 @@ public class Speaker implements Runnable{
 	private int whichSpeaker;
 	static int speed;
 	static int circleDensity = 1;
+	Boolean czynny=true;
 Speaker(){
 		animation=new CopyOnWriteArrayList<Circle>();
 		 File inputFile = new File("glosnik.png");
@@ -45,9 +46,13 @@ Speaker(){
 }
 void setSpeed(int i) {
 	if(i==0)
-		speed=0;
+		czynny=false;
 	else
+	{
 		speed=1000/i;
+		czynny=true;
+	}
+		
 }
 
 public void draw(Graphics g2d) {
@@ -108,14 +113,14 @@ public void setCircleDensity(int i) {
 
 @Override
 public void run() {
-	while(true){
+	while(czynny){
 		{
 			  for (Circle cr : animation) {
               cr.setRadius(cr.getRadius()+circleDensity*10);
               cr.setColor(cr.getRadius()); 
           } 
 			  MainFrame.center.repaint(); 
-			  }     
+			 
         try {
         	
             Thread.sleep(speed);
@@ -123,7 +128,7 @@ public void run() {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }	
-}
+} }     
 
 }
 	

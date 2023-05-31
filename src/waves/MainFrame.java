@@ -12,18 +12,20 @@ import javax.swing.event.ChangeListener;
 public class MainFrame extends JFrame {
 	static JButton parametryDziweku, parametryOsrodka, lowDensity, highDensity, midDensity;
 	static JRadioButton angielski, polski;
-	static JPanel waveLabels, sliderLabels, textPanel, north, east, jezyki,labelsPane;
+	static JPanel waveLabels, sliderLabels, textPanel, east, jezyki,labelsPane;
 	static Slider tempoSymulacji;
 	static JLabel tempo, comboBoxText;
 	static JComboBox<String> cb;
 	static Menu rozwijane;
+	private JMenuBar menuBar;
 	static WaveGraph graph;
 	static ArrayList<Wave> waves;
 	static ArrayList<Label> waveLabel;
 	static int waveIdx = 0;
 	static ArrayList<String> choices;
 	static Visualisation center;
-
+	private GraphPanel wykres;
+	
 	MainFrame() throws HeadlessException {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,19 +46,6 @@ public class MainFrame extends JFrame {
 		waveLabel = new ArrayList<Label>();
 		waves=new ArrayList<>();
 		choices = new ArrayList<String>();
-
-//		for (Wave wave : waves) {
-//			waveLabel.add(new Label(wave.toString()));
-//			waveLabels.add(waveLabel.get(waveIdx));
-//			choices.add(String.valueOf(waveIdx + 1));
-//			waveIdx++;
-//			try {
-//				SoundGenerator.generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		;
 		comboBoxText = new JLabel("Wybierz, parametry którego dźwięku chcesz zmienić");
 		textPanel = new JPanel();
 		textPanel.setSize(100, 100);
@@ -65,9 +54,14 @@ public class MainFrame extends JFrame {
 		parametryDziweku.addActionListener(new SoundParameters());
 		parametryOsrodka = new JButton("Parametry ośrodka");
 		parametryOsrodka.addActionListener(new MediumParameters());
-		angielski = new JRadioButton("Angielski");
+
+		ImageIcon ang = new ImageIcon("angielski.jpg");
+	    angielski = new JRadioButton(ang);
 		angielski.addActionListener(new LanguageButton());
-		polski = new JRadioButton("Polski");
+		angielski.setText("English");
+		ImageIcon pl = new ImageIcon("polski.jpg");
+	    polski = new JRadioButton(pl);
+	    polski.setText("Polski");
 		polski.addActionListener(new LanguageButton());
 		ButtonGroup group = new ButtonGroup();
 		group.add(angielski);
@@ -75,7 +69,7 @@ public class MainFrame extends JFrame {
 		polski.setSelected(true);
 		tempo = new JLabel("Tempo Symulacji");
 		tempoSymulacji = new Slider(0, 100, 25);
-		tempoSymulacji.setMinimum(10);
+		tempoSymulacji.setValue(10);
 		tempoSymulacji.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				for(Speaker s: center.speakers)
@@ -85,28 +79,31 @@ public class MainFrame extends JFrame {
 		});
 
 		String[] arr = choices.toArray(new String[0]);
-
 		cb = new JComboBox<String>(arr);
 		cb.addActionListener(new ComboBoxListener());
-
 		textPanel.add(comboBoxText);
 		textPanel.add(cb);
-
-		north = new JPanel();
 		east = new JPanel();
 		jezyki = new JPanel();
 		jezyki.setLayout(new GridLayout(1, 2));
 		jezyki.add(angielski);
-		jezyki.add(polski);
-		east.setLayout(new GridLayout(6, 1));
-		north.setLayout(new GridLayout(1, 3));
-		rozwijane = new Menu();
-		north.add(rozwijane);
-		north.add(labelsPane);
-		east.add(parametryDziweku);
-		east.add(parametryOsrodka);
+		jezyki.add(polski);	
+		east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
+		menuBar=new JMenuBar();
+		rozwijane = new Menu();	
+		menuBar.add(rozwijane);
+		this.add(menuBar, BorderLayout.NORTH);
+		JPanel parametry=new JPanel();
+		parametry.add(parametryDziweku);
+		parametry.add(parametryOsrodka);
+		
+		graph = new WaveGraph(MainFrame.waves);
+		wykres=new GraphPanel();
+		east.add(graph.panel);
+		east.add(parametry);
+		east.add(labelsPane);
 		JPanel densityPanel = new JPanel();
-		lowDensity = new JButton("Mala gestosc");
+		lowDensity = new JButton("Mała gęstość");
 		lowDensity.addActionListener(new ActionListener() {
 			
 			@Override
@@ -116,7 +113,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		midDensity = new JButton("Srednia gestosc");
+		midDensity = new JButton("Średnia gęstość");
 		midDensity.addActionListener(new ActionListener() {
 			
 			@Override
@@ -125,7 +122,7 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-		highDensity = new JButton("Duza gestosc");
+		highDensity = new JButton("Duża gęstość");
 		highDensity.addActionListener(new ActionListener() {
 			
 			@Override
@@ -137,22 +134,17 @@ public class MainFrame extends JFrame {
 		densityPanel.add(lowDensity);
 		densityPanel.add(midDensity);
 		densityPanel.add(highDensity);
+	
 		east.add(densityPanel);
 		east.add(tempo);
 		east.add(tempoSymulacji);
 		east.add(jezyki);
 		this.add(textPanel, BorderLayout.PAGE_END);
 		this.add(east, BorderLayout.EAST);
-		this.add(north, BorderLayout.NORTH);
 		this.add(center, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		
 		this.setSize(1280, 720);
 	}
-
-//		public static void main(String[] args) {
-//		Main frame = new Main();
-//		frame.setVisible(true);
-//	}
 }

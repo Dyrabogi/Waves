@@ -22,8 +22,6 @@ public class LanguageButton implements ActionListener {
 			MainFrame.lowDensity.setText("Low Density");
 			MainFrame.midDensity.setText("Medium Density");
 			MainFrame.comboBoxText.setText("Choose which sound parameters you want to change");
-			MainFrame.polski.setText("Polish");
-			MainFrame.angielski.setText("English");
 			MainFrame.tempo.setText("Speed of animation");
 			MainFrame.parametryDziweku.setText("Parameters of sound number " + (MainFrame.cb.getSelectedIndex() + 1));
 			MainFrame.parametryOsrodka.setText("Medium Parameters");
@@ -43,8 +41,6 @@ public class LanguageButton implements ActionListener {
 			MainFrame.lowDensity.setText("Mała gęstość");
 			MainFrame.midDensity.setText("Średnia gęstość");
 			MainFrame.comboBoxText.setText("Wybierz, parametry którego dźwięku chcesz zmienić");
-			MainFrame.polski.setText("polski");
-			MainFrame.angielski.setText("angielski");
 			MainFrame.tempo.setText("Tempo animacji");
 			MainFrame.parametryDziweku.setText("Parametry dzwięku nr " + (MainFrame.cb.getSelectedIndex() + 1));
 			MainFrame.parametryOsrodka.setText("Parametry ośrodka");

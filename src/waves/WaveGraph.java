@@ -2,6 +2,7 @@ package waves;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
@@ -14,9 +15,11 @@ public class WaveGraph extends JPanel {
 
 	ArrayList<Wave> waves;
 	static ChartFrame frame1;
+	static ChartPanel panel;
 	JFreeChart chart;
 	XYSeriesCollection dataset = new XYSeriesCollection();
 	BufferedImage image;
+	
 	public WaveGraph(ArrayList<Wave> waves) {
 		super();
 		XYSeries series = new XYSeries(" f(x) ");
@@ -41,6 +44,7 @@ public class WaveGraph extends JPanel {
 		}
 
 		frame1 = new ChartFrame("Chart", chart);
+		panel=new ChartPanel(chart);
 		frame1.setSize(1400, 600);
 		image = chart.createBufferedImage(500, 500);
 		this.waves = waves;
@@ -67,6 +71,7 @@ public class WaveGraph extends JPanel {
 		
 		dataset.removeAllSeries();
 		dataset.addSeries(series);
+		repaint();
 		
 	}
 
