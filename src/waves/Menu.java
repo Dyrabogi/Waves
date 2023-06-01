@@ -21,7 +21,8 @@ public class Menu extends JMenuBar {
 	static JMenu dzwiek, detektor;
 	Random rand;
 	JFileChooser fc = new JFileChooser();
-	SqlConnector soundsDatabase;
+	static SqlConnector soundsDatabase;
+	static ExecutorService exec;
 
 	Menu() {
 		super();
@@ -48,8 +49,8 @@ public class Menu extends JMenuBar {
 		});
 
 		zListy = new JMenuItem("Z listy");
-		SqlConnector soundsDatabase = new SqlConnector();
-		ExecutorService exec=Executors.newFixedThreadPool(1);
+		soundsDatabase = new SqlConnector();
+		exec=Executors.newFixedThreadPool(1);
 		exec.execute(soundsDatabase);
 
 		zListy.addActionListener(new ActionListener() {

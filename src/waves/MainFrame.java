@@ -24,8 +24,11 @@ public class MainFrame extends JFrame {
 	static int waveIdx = 0;
 	static ArrayList<String> choices;
 	static Visualisation center;
-	static JDialog dialog;
+	static JDialog dialog, dialog2;
 	JScrollPane scrollPane;
+	static Object selectedValue;
+	static Object[] possibleValues ={ "Korzystaj z aplikacji bez internetu", "Spróbuj ponownie się połączyć" };
+	
 	MainFrame() throws HeadlessException {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +44,7 @@ public class MainFrame extends JFrame {
         labelsPane = new JPanel(null);
         labelsPane.setPreferredSize(new Dimension(40,100));
         labelsPane.add(scrollPane);
-      
+       
 		waveLabels.setLayout(new GridLayout(2, 1));
 		waveLabel = new ArrayList<Label>();
 		waves=new ArrayList<>();
@@ -90,6 +93,9 @@ public class MainFrame extends JFrame {
 		jezyki.add(polski);	
 		east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
 		menuBar=new JMenuBar();
+		JOptionPane pane = new JOptionPane("Trwa łączenie z bazą danych");
+	    dialog = pane.createDialog(this, "Uwaga");
+	    this.setVisible(true);
 		rozwijane = new Menu();	
 		menuBar.add(rozwijane);
 		this.add(menuBar, BorderLayout.NORTH);
@@ -137,10 +143,6 @@ public class MainFrame extends JFrame {
 		this.add(east, BorderLayout.EAST);
 		this.add(center, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-		JOptionPane pane = new JOptionPane("Trwa łączenie z bazą danych");
-	    dialog = pane.createDialog(this, "Uwaga");
-	    dialog.setVisible(true);
 		this.setSize(1280, 720);
 	}
 }

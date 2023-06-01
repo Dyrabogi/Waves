@@ -7,7 +7,12 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 
 public class SqlConnector implements Runnable{
@@ -68,14 +73,10 @@ Connection conn;
 		Menu.zListy.setEnabled(false);
 	try {
 		conn = DriverManager.getConnection("jdbc:mysql://db4free.net/wavestemplate", "dyrabog", "Dajmito123");
-
 		Statement statement = conn.createStatement();
-		
 		statement.execute("SELECT Id, name, frequency FROM dzwieki");
 		ResultSet rs = statement.getResultSet();
-		
 		ResultSetMetaData md  = rs.getMetaData();
-		
 		System.out.println();
 		int tr;
 		int j = 0;
@@ -85,17 +86,28 @@ Connection conn;
 					soundNames.add(rs.getString("name"));
 					importedWaves.get(j).setFreq(rs.getDouble("frequency"));
 					j++;
-			
 		}
-		Menu.zListy.setEnabled(true);
-		MainFrame.dialog.setVisible(false);
-	} catch (SQLException e) {
 		
+		
+	}
+	catch (CommunicationsException e1) {
+			  int dialogButton = JOptionPane.YES_NO_OPTION;
+			  int dialogResult = JOptionPane.showConfirmDialog (null, "Brak internetu. Czy chcesz spróbować się połączyć jeszcze raz?","Uwaga",dialogButton);
+			  if(dialogResult == JOptionPane.YES_OPTION){
+			    MainFrame.rozwijane.exec.execute(MainFrame.rozwijane.soundsDatabase);
+			  }
+		} 
+	catch (SQLException e) {
 		e.printStackTrace();
-	} finally {
+	}
+	
+	finally {
+		MainFrame.dialog.setVisible(true);
 		if (conn!= null){
 			try {
 				conn.close();
+				Menu.zListy.setEnabled(true);
+				MainFrame.dialog.setVisible(false);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
