@@ -37,6 +37,7 @@ public class LanguageButton implements ActionListener {
 			Menu.zapisz.setText("Zapisz wykres");
 			Menu.zListy.setText("Wybierz z listy");
 			Menu.detektor.setText("Detektor");
+			Menu.json.setText("Wczytaj z pliku json");
 			MainFrame.highDensity.setText("Duża gęstość");
 			MainFrame.lowDensity.setText("Mała gęstość");
 			MainFrame.midDensity.setText("Średnia gęstość");

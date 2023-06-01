@@ -71,7 +71,8 @@ public class WaveGraph extends JPanel {
 		
 		dataset.removeAllSeries();
 		dataset.addSeries(series);
-		repaint();
+		panel.repaint();
+		frame1.repaint();
 		
 	}
 

@@ -7,60 +7,20 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
-public class SqlConnector {
+public class SqlConnector implements Runnable{
 
 ArrayList<Wave> importedWaves;
 ArrayList<String> soundNames;
-	
+Connection conn;
 	public SqlConnector() {
 	
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection("jdbc:mysql://db4free.net/wavestemplate", "dyrabog", "Dajmito123");
-
-			Statement statement = conn.createStatement();
-			
-			statement.execute("SELECT Id, name, frequency FROM dzwieki");
-			
-			
-			ResultSet rs = statement.getResultSet();
-			
-			ResultSetMetaData md  = rs.getMetaData();
-					
-			importedWaves = new ArrayList();
-			soundNames = new ArrayList();
-		
-			System.out.println();
-			int tr;
-			int j = 0;
-			while (rs.next()) {
-				
-					//for (int ii = 1; ii <= md.getColumnCount(); ii++){
-						tr =  rs.getInt("Id");
-						importedWaves.add(new Wave(1,0,0));
-						soundNames.add(rs.getString("name"));
-						importedWaves.get(j).setFreq(rs.getDouble("frequency"));
-						j++;
-				
-			}
-
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} finally {
-			if (conn!= null){
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-
+		conn = null;
+		importedWaves = new ArrayList();
+		soundNames = new ArrayList();
+	
 	}
 	
 	public int getWaveindex(String name) {
@@ -100,8 +60,49 @@ ArrayList<String> soundNames;
 	double getPhase(int i) {
 		return importedWaves.get(i).getPhase();
 	}
-	
 
+	@Override
+	public void run() {
+
+		
+		Menu.zListy.setEnabled(false);
+	try {
+		conn = DriverManager.getConnection("jdbc:mysql://db4free.net/wavestemplate", "dyrabog", "Dajmito123");
+
+		Statement statement = conn.createStatement();
+		
+		statement.execute("SELECT Id, name, frequency FROM dzwieki");
+		ResultSet rs = statement.getResultSet();
+		
+		ResultSetMetaData md  = rs.getMetaData();
+		
+		System.out.println();
+		int tr;
+		int j = 0;
+		while (rs.next()) {
+					tr =  rs.getInt("Id");
+					importedWaves.add(new Wave(1,0,0));
+					soundNames.add(rs.getString("name"));
+					importedWaves.get(j).setFreq(rs.getDouble("frequency"));
+					j++;
+			
+		}
+		Menu.zListy.setEnabled(true);
+		MainFrame.dialog.setVisible(false);
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	} finally {
+		if (conn!= null){
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	}
 
 	}
 

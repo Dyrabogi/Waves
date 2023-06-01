@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static waves.WaveGraph.*;
 
@@ -23,7 +25,7 @@ public class Menu extends JMenuBar {
 
 	Menu() {
 		super();
-		SqlConnector soundsDatabase = new SqlConnector();
+		
 		rand = new Random();
 		dzwiek = new JMenu("Dodaj źródło dźwięku");
 		this.add(dzwiek);
@@ -46,6 +48,10 @@ public class Menu extends JMenuBar {
 		});
 
 		zListy = new JMenuItem("Z listy");
+		SqlConnector soundsDatabase = new SqlConnector();
+		ExecutorService exec=Executors.newFixedThreadPool(1);
+		exec.execute(soundsDatabase);
+
 		zListy.addActionListener(new ActionListener() {
 		
 			@Override
@@ -95,7 +101,7 @@ public class Menu extends JMenuBar {
 		wlasne.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Wave waveTemp = new Wave(0, 0, 0);
+				Wave waveTemp = new Wave(0, 0, 1);
 				MainFrame.waves.add(waveTemp);
 				MainFrame.waveLabel.add(new Label((MainFrame.waveIdx +1) +". " + waveTemp.toString()));
 				MainFrame.waveLabels.setLayout(new GridLayout(MainFrame.waveIdx + 1, 1));

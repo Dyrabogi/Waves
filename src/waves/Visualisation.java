@@ -74,6 +74,8 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 			 podniesienieX=e.getX()-detector.getxPos();
 			 podniesienieY=e.getY()-detector.getyPos();
 		 }
+		 MainFrame.graph.setWaves(MainFrame.waves);
+		 MainFrame.graph.panel.repaint();
 		 
 	 }
 	 public void mouseReleased(MouseEvent e) {
@@ -100,8 +102,9 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 	         popupmenu.add(change);   
 	         popupmenu.show(MainFrame.center, e.getX(), e.getY()); 
 					 }
-			
-	         
+					 MainFrame.graph.setWaves(MainFrame.waves);
+					 MainFrame.graph.panel.repaint();
+					 
 	         
 	}}}}
 	public void mouseEntered(MouseEvent e) {}
@@ -116,7 +119,10 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 			speakers.get(doZmiany).setxWidth();
 			speakers.get(doZmiany).setyWidth();
 			this.revalidate();
-			this.repaint();}
+			this.repaint();
+			MainFrame.graph.setWaves(MainFrame.waves);
+			 MainFrame.graph.panel.repaint();
+			 }
 			else {
 				detector.setxPos(e.getX()-podniesienieX);
 				detector.setyPos(e.getY()-podniesienieY);
@@ -124,6 +130,9 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 				detector.setyWidth();
 				this.revalidate();
 				this.repaint();
+				MainFrame.graph.setWaves(MainFrame.waves);
+				 MainFrame.graph.panel.repaint();
+				 
 			}
 				
 		}

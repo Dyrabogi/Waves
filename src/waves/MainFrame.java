@@ -24,7 +24,8 @@ public class MainFrame extends JFrame {
 	static int waveIdx = 0;
 	static ArrayList<String> choices;
 	static Visualisation center;
-	
+	static JDialog dialog;
+	JScrollPane scrollPane;
 	MainFrame() throws HeadlessException {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,10 +34,10 @@ public class MainFrame extends JFrame {
 		
 		center=new Visualisation();
 		waveLabels = new JPanel();
-		JScrollPane scrollPane = new JScrollPane(waveLabels);
+		scrollPane = new JScrollPane(waveLabels);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBounds(15,10,600,75);
+        scrollPane.setBounds(15,10,325,75);
         labelsPane = new JPanel(null);
         labelsPane.setPreferredSize(new Dimension(40,100));
         labelsPane.add(scrollPane);
@@ -137,7 +138,9 @@ public class MainFrame extends JFrame {
 		this.add(center, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		
+		JOptionPane pane = new JOptionPane("Trwa łączenie z bazą danych");
+	    dialog = pane.createDialog(this, "Uwaga");
+	    dialog.setVisible(true);
 		this.setSize(1280, 720);
 	}
 }
