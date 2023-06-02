@@ -36,6 +36,8 @@ public class SoundParameters implements ActionListener {
 				MainFrame.waves.get(MainFrame.cb.getSelectedIndex()).setAmp(ampSlider.getValue());
 				MainFrame.waveLabel.get(MainFrame.cb.getSelectedIndex())
 						.setText(MainFrame.waves.get(MainFrame.cb.getSelectedIndex()).toString());
+				 MainFrame.graph.setWaves(MainFrame.waves);
+				 MainFrame.graph.panel.repaint();
 			}
 		});
 		Slider czeSlider = new Slider(0, 100, 10);
@@ -45,6 +47,8 @@ public class SoundParameters implements ActionListener {
 				MainFrame.waves.get(MainFrame.cb.getSelectedIndex()).setFreq(czeSlider.getValue());
 				MainFrame.waveLabel.get(MainFrame.cb.getSelectedIndex())
 						.setText(MainFrame.waves.get(MainFrame.cb.getSelectedIndex()).toString());
+				 MainFrame.graph.setWaves(MainFrame.waves);
+				 MainFrame.graph.panel.repaint();
 			}
 		});
 		Slider przesSlider = new Slider(0, 100, 10);
@@ -54,6 +58,8 @@ public class SoundParameters implements ActionListener {
 				MainFrame.waves.get(MainFrame.cb.getSelectedIndex()).setPhase(przesSlider.getValue());
 				MainFrame.waveLabel.get(MainFrame.cb.getSelectedIndex())
 						.setText(MainFrame.waves.get(MainFrame.cb.getSelectedIndex()).toString());
+				 MainFrame.graph.setWaves(MainFrame.waves);
+				 MainFrame.graph.panel.repaint();
 			}
 		});
 		JFormattedTextField ampText = new JFormattedTextField();

@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-
 public class Circle {
 
 		protected int x;
@@ -14,7 +13,7 @@ public class Circle {
 	    protected int i;
 
 	    public Circle(int i){
-	    	this.i=i;
+	    	this.i=i;	    	
 	    }
 	    
 	    public void setOrigin(int x, int y) {
@@ -32,15 +31,18 @@ public class Circle {
 	    	
 	    	double amp=0;	    	
 			amp= Math.sin(MainFrame.waves.get(i).getFreq()*x+MainFrame.waves.get(i).getPhase())+1;
-			amp=amp/2;
+			amp/=2;
 			float famp=(float) amp;
-			float a=(float) 0.5;
-			if(famp<0.33)
-				color=new Color(famp, famp/2, 0, a);
-			else if(famp<0.66)
-				color=new Color(0, 0, famp, a);
-			else
-				color=new Color(0, famp, 0, a);
+			if(famp <0.2)
+				color=Color.getHSBColor((float) 0.3, (float) 0.8, (float) 0.8);
+			else if(famp <0.4)
+				color=Color.getHSBColor((float) 0.5, (float) 0.8, (float) 0.8);
+			else if(famp <0.6)
+				color=Color.getHSBColor((float) 0.7, (float) 0.8, (float) 0.8);
+			else if(famp <0.8)
+				color=Color.getHSBColor((float) 0.9, (float) 0.8, (float) 0.8);
+			else 
+				color=Color.getHSBColor(1, 1, (float) 0.8);
 	    }
 	
 	public void draw(Graphics2D g2d) {

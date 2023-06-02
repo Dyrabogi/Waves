@@ -44,6 +44,8 @@ public class MediumParameters implements ActionListener {
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			cisnienie=cisSlider.getValue();
+			 MainFrame.graph.setWaves(MainFrame.waves);
+			 MainFrame.graph.panel.repaint();
 			
 		}
 		

@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
 	static JRadioButton angielski, polski;
 	static JPanel waveLabels, sliderLabels, textPanel, east, jezyki,labelsPane;
 	static Slider tempoSymulacji;
-	static JLabel tempo, comboBoxText;
+	static JLabel tempo, comboBoxText, legendLabel;
 	static JComboBox<String> cb;
 	static Menu rozwijane;
 	private JMenuBar menuBar;
@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
 	JScrollPane scrollPane;
 	static Object selectedValue;
 	static Object[] possibleValues ={ "Korzystaj z aplikacji bez internetu", "Spróbuj ponownie się połączyć" };
-	
+	public Legend legend;
 	MainFrame() throws HeadlessException {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -134,8 +134,11 @@ public class MainFrame extends JFrame {
 		densityPanel.add(lowDensity);
 		densityPanel.add(midDensity);
 		densityPanel.add(highDensity);
-	
+		legend=new Legend();
 		east.add(densityPanel);
+		legendLabel=new JLabel("Legenda symulacji");
+		east.add(legendLabel);
+		east.add(legend);
 		east.add(tempo);
 		east.add(tempoSymulacji);
 		east.add(jezyki);

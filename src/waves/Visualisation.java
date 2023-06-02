@@ -1,7 +1,9 @@
 package waves;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,12 +14,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+import java.awt.Graphics2D;
+
 
 public class Visualisation extends JPanel implements MouseMotionListener{
 	static Detector detector;
 	static ArrayList <Speaker> speakers;
 	int doZmiany, podniesienieX, podniesienieY;
 	boolean zmiana;
+	GradientPaint gradient;
 	
 	Visualisation(){
 	zmiana=false;
@@ -27,16 +32,18 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 	 this.addMouseListener(myMouseListener);
 	 this.addMouseMotionListener(this);
      repaint();
+    
      setVisible(true);
 	}
 	
 	
 	public void paintComponent(Graphics g) {
 	       super.paintComponent(g);
-	       detector.draw(g);
+	       
 	        for(Speaker i:speakers) {
 	        	i.draw(g);
 	        	}
+	        detector.draw(g);
 	        }
 	
 	void addSpeaker() {
@@ -48,6 +55,7 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 	            }
 		repaint();
 	}
+
 	public void changeCircleDensity(int i) {
 		for(Speaker j:speakers) {
         	j.setCircleDensity(i);
