@@ -10,7 +10,8 @@ public class LanguageButton implements ActionListener {
 
 			Menu.losowo.setText("Random");
 			Menu.dzwiek.setText("Add sound source");
-			Menu.nagraj.setText("Record the sound");
+			Menu.nagraj.setText("Save the sound");
+			Menu.zatrzymaj.setText("Stop the sound");
 			Menu.odtworz.setText("Play the sound");
 			Menu.pokaz.setText("Show the wave graph");
 			Menu.wlasne.setText("Select parameters");
@@ -31,9 +32,10 @@ public class LanguageButton implements ActionListener {
 
 			Menu.losowo.setText("Losowo");
 			Menu.dzwiek.setText("Dodaj źródło dźwięku");
-			Menu.nagraj.setText("Nagraj dźwięk");
+			Menu.nagraj.setText("Zapisz dźwięk");
 			Menu.odtworz.setText("Odtwórz dźwięk");
 			Menu.pokaz.setText("Pokaż wykres fali");
+			Menu.zatrzymaj.setText("Zatrzymaj dźwięk");
 			Menu.wlasne.setText("Wybierz własne parametry");
 			Menu.zapisz.setText("Zapisz wykres");
 			Menu.zListy.setText("Wybierz z listy");

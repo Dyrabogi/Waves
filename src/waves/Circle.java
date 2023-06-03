@@ -30,7 +30,7 @@ public class Circle {
 	    public void setColor(double x) {
 	    	
 	    	double amp=0;	    	
-			amp= Math.sin(MainFrame.waves.get(i).getFreq()*x+MainFrame.waves.get(i).getPhase())+1;
+			amp= Math.sin(MainFrame.waves.get(i).getFreq()*1000*x+MainFrame.waves.get(i).getPhase())+1;
 			amp/=2;
 			float famp=(float) amp;
 			if(famp <0.2)

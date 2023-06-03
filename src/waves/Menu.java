@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,12 +20,13 @@ import static waves.WaveGraph.*;
 
 public class Menu extends JMenuBar {
 
-	static JMenuItem losowo, zListy, wlasne, nagraj, odtworz, pokaz, zapisz, json  ;
+	static JMenuItem losowo, zListy, wlasne, nagraj, odtworz, pokaz, zapisz, json, zatrzymaj;
 	static JMenu dzwiek, detektor;
 	Random rand;
 	JFileChooser fc = new JFileChooser();
 	static SqlConnector soundsDatabase;
 	static ExecutorService exec;
+	static SoundGenerator sound;
 
 	Menu() {
 		super();
@@ -50,7 +54,7 @@ public class Menu extends JMenuBar {
 
 		zListy = new JMenuItem("Z listy");
 		soundsDatabase = new SqlConnector();
-		exec=Executors.newFixedThreadPool(1);
+		exec=Executors.newFixedThreadPool(2);
 		exec.execute(soundsDatabase);
 
 		zListy.addActionListener(new ActionListener() {
@@ -143,10 +147,57 @@ public class Menu extends JMenuBar {
 		dzwiek.add(json);
 
 		detektor = new JMenu("Detektor");
-		nagraj = new JMenuItem("Nagraj dźwięk");
+		nagraj = new JMenuItem("Zapisz dźwięk");
+		nagraj.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				 JFileChooser chooser = new JFileChooser();
+		         chooser.setDialogTitle("Wybierz plik");
+		         int result = chooser.showDialog(null, "Wybierz");
+		         for (Wave wave : MainFrame.waves) {
+						try {
+							sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+		         }
+		         try {
+		        	 
+					Path temp = Files.move
+						        (Paths.get(sound.doZapisu.toURI()),
+						        Paths.get(chooser.getSelectedFile().toURI()));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		detektor.add(nagraj);
 		odtworz = new JMenuItem("Odtwórz dźwięk");
 		detektor.add(odtworz);
+		zatrzymaj = new JMenuItem("Zatrzymaj dźwięk");
+		detektor.add(zatrzymaj);
+		zatrzymaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sound.czynny=false;
+			}
+		});
+		sound=new SoundGenerator();
+		odtworz.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sound.czynny=true;
+				for (Wave wave : MainFrame.waves) {
+					try {
+						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
+						exec.execute(sound);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+		
+			}
+			
+		});
 		WaveGraph graph = new WaveGraph(MainFrame.waves);
 		pokaz = new JMenuItem("Pokaż wykres fali");
 		pokaz.addActionListener(new ActionListener() {

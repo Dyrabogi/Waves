@@ -3,13 +3,24 @@ package waves;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.*;
+import javax.sound.sampled.*;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-
-public class SoundGenerator {
+public class SoundGenerator implements Runnable{
+	public Boolean czynny=true;
+	public static Clip clip;
+	static AudioInputStream stream;
+	public static File out, doZapisu;
+	 SoundGenerator(){
+		 for (Wave wave : MainFrame.waves) {
+					try {
+						generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+	 }
+	 }
+	 
 	public static void generate(Wave wave, String fileName) throws IOException {
 		final double frequency = wave.getFreq();
 		final double amplitude = wave.getAmp();
@@ -36,8 +47,8 @@ public class SoundGenerator {
 			byteBuffer[i] = (byte) (x >>> 8);
 		}
 
-		File out = new File("generated/" + fileName + ".wav");
-
+		out= new File("generated/" + fileName + ".wav");
+		doZapisu=new File("generated/" + fileName + ".wav");
 		final boolean bigEndian = false;
 		final boolean signed = true;
 
@@ -49,7 +60,34 @@ public class SoundGenerator {
 		AudioInputStream audioInputStream = new AudioInputStream(bais, format, buffer.length);
 		AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, out);
 		audioInputStream.close();
-
-		// koniec kodu
+		
+		   
 	}
+	@Override
+	public void run() {
+
+		while(czynny) {
+			try {
+		    AudioFormat format2;
+		    DataLine.Info info;
+		    stream = AudioSystem.getAudioInputStream(out);
+		    format2 = stream.getFormat();
+		    info = new DataLine.Info(Clip.class, format2);
+		    clip = (Clip) AudioSystem.getLine(info);
+		    clip.open(stream);
+		    clip.start();
+			}
+		
+		catch (Exception e) {
+		}
+			 try {
+				 Thread.sleep(2000);   
+		        } catch (InterruptedException e2) {
+		            e2.printStackTrace();
+		        }	
+		 }     
+		
 }
+}
+
+
