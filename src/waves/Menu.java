@@ -168,7 +168,7 @@ public class Menu extends JMenuBar {
 //				} catch (IOException e1) {
 //					e1.printStackTrace();
 //				}
-				for (Wave wave : MainFrame.waves) {
+//				for (Wave wave : MainFrame.waves) {
 //					try {
 //						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound",true);
 ////						exec.execute(sound);
@@ -181,7 +181,7 @@ public class Menu extends JMenuBar {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
+//				}
 		
 			
 				
@@ -204,15 +204,20 @@ public class Menu extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sound.czynny=true;
-				for (Wave wave : MainFrame.waves) {
-					try {
-						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound",false);
-						exec.execute(sound);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+//				for (Wave wave : MainFrame.waves) {
+//					try {
+//						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound",false);
+//						exec.execute(sound);
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
+//				}
+				try {
+					sound.playSounds(MainFrame.waves);
+					exec.execute(sound);
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
-		
 			}
 			
 		});
