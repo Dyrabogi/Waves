@@ -46,6 +46,12 @@ public class Visualisation extends JPanel implements MouseMotionListener{
 	        detector.draw(g);
 	        }
 	
+//    public void paintComponent(Graphics g) {
+//        super.paintComponent(g); //paint background
+//        g.setColor(Color.red);       
+//        g.drawLine(1, 1,1,1);   
+//    }
+//	
 	void addSpeaker() {
 		Speaker speak=new Speaker();
 		speakers.add(speak);

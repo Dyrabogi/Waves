@@ -9,6 +9,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.swing.JPanel;
 
 public class WaveGraph extends JPanel {
@@ -52,13 +54,17 @@ public class WaveGraph extends JPanel {
 
 	public void setWaves(ArrayList<Wave> waves) {
 		this.waves = waves;
-		
+		if(waves.size() != 0) {
+		ArrayList<Double> freqs = new ArrayList();
+		for(Wave wav : waves)
+			freqs.add(wav.getFreq());
+		double minFreq = Collections.min(freqs);
 		XYSeries series = new XYSeries(" f(x) ");
 		double y;
-		for (double x = 0.1; x <= 1000; x++) {
+		for (double x = 0 ; x <= 2*(1/minFreq); x+=(1/minFreq)/200) {
 			y = 0;
 						
-			for (int i = 0; i <= waves.size() - 1; i++) {
+			for (int i = 0; i < waves.size() ; i++) {
 				double lambda=Math.sqrt(MediumParameters.getCisnienie())/waves.get(i).getFreq();
 				double 	d=Math.pow(Visualisation.detector.getxPos()-Visualisation.speakers.get(i).getxPos(), 2);
 				d+=Math.pow(Visualisation.detector.getyPos()-Visualisation.speakers.get(i).getyPos(), 2);
@@ -69,8 +75,10 @@ public class WaveGraph extends JPanel {
 			series.add(x, y);
 		}
 		
+		
 		dataset.removeAllSeries();
 		dataset.addSeries(series);
+		}
 		panel.repaint();
 		frame1.repaint();
 		
