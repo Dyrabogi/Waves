@@ -213,7 +213,7 @@ public class Menu extends JMenuBar {
 //					}
 //				}
 				try {
-					sound.playSounds(MainFrame.waves);
+					sound.saveSounds(MainFrame.waves);
 					exec.execute(sound);
 				} catch (IOException e1) {
 					e1.printStackTrace();
