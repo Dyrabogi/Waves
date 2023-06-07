@@ -150,24 +150,42 @@ public class Menu extends JMenuBar {
 		nagraj = new JMenuItem("Zapisz dźwięk");
 		nagraj.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				 JFileChooser chooser = new JFileChooser();
-		         chooser.setDialogTitle("Wybierz plik");
-		         int result = chooser.showDialog(null, "Wybierz");
-		         for (Wave wave : MainFrame.waves) {
-						try {
-							sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-		         }
-		         try {
-		        	 
-					Path temp = Files.move
-						        (Paths.get(sound.doZapisu.toURI()),
-						        Paths.get(chooser.getSelectedFile().toURI()));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+//				 JFileChooser chooser = new JFileChooser();
+//		         chooser.setDialogTitle("Wybierz plik");
+//		         int result = chooser.showDialog(null, "Wybierz");
+//		         for (Wave wave : MainFrame.waves) {
+//						try {
+//							sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound",true);
+//						} catch (IOException e1) {
+//							e1.printStackTrace();
+//						}
+//		         }
+//		         try {
+//		        	 
+//					Path temp = Files.move
+//						        (Paths.get(sound.doZapisu.toURI()),
+//						        Paths.get(chooser.getSelectedFile().toURI()));
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
+//				for (Wave wave : MainFrame.waves) {
+//					try {
+//						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound",true);
+////						exec.execute(sound);
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
+					try {
+						sound.saveSounds(MainFrame.waves);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+//				}
+		
+			
+				
+				
 			}
 		});
 		detektor.add(nagraj);
@@ -186,15 +204,20 @@ public class Menu extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sound.czynny=true;
-				for (Wave wave : MainFrame.waves) {
-					try {
-						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound");
-						exec.execute(sound);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+//				for (Wave wave : MainFrame.waves) {
+//					try {
+//						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound",false);
+//						exec.execute(sound);
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
+//				}
+				try {
+					sound.saveSounds(MainFrame.waves);
+					exec.execute(sound);
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
-		
 			}
 			
 		});
@@ -241,6 +264,8 @@ public class Menu extends JMenuBar {
 		detektor.add(zapisz);
 
 		this.add(detektor);
-	}}
+	}
+}
+	
 	
 
