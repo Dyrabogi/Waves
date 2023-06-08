@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -18,6 +19,8 @@ import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 public class SqlConnector implements Runnable{
 
 ArrayList<Wave> importedWaves;
+ArrayList<Double> importedMediumVals;
+ArrayList<String> importedMediumNames;
 ArrayList<String> soundNames;
 Connection conn;
 	public SqlConnector() {
@@ -25,7 +28,8 @@ Connection conn;
 		conn = null;
 		importedWaves = new ArrayList();
 		soundNames = new ArrayList();
-	
+		importedMediumVals = new ArrayList();
+		importedMediumNames = new ArrayList();
 	}
 	
 	public int getWaveindex(String name) {
@@ -40,10 +44,27 @@ Connection conn;
 		}
 		return index;
 	}
+	public int getMediumindex(String name) {
+		int index = 0;
+		
+		for(String str : importedMediumNames) {
+			if(str == name)
+				return index;
+			else
+				index ++;
+		
+		}
+		return index;
+	}
 	
 	public String printParameters(int i) {
 		String pars = "Amplituda -> " + importedWaves.get(i).getAmp() +"\n"+ ", czestotliwosc -> " 
 				+ importedWaves.get(i).getFreq() +"\n"+ ", faza -> " + importedWaves.get(i).getPhase();
+		return pars;
+	}
+	
+	public String printMediumParameters(int i) {
+		String pars = "Cisnienie -> " + importedMediumVals.get(i);
 		return pars;
 	}
 	
@@ -64,6 +85,12 @@ Connection conn;
 	}
 	double getPhase(int i) {
 		return importedWaves.get(i).getPhase();
+	}
+	public ArrayList<Double> getMediumPressures(){
+		return importedMediumVals;
+	}
+	public ArrayList<String> getMediumNames(){
+		return importedMediumNames;
 	}
 
 	@Override
@@ -114,7 +141,48 @@ Connection conn;
 		}
 	}
 	
+	MediumParameters.lista.setEnabled(false);
+	try {
+		conn = DriverManager.getConnection("jdbc:mysql://db4free.net/wavestemplate", "dyrabog", "Dajmito123");
+		Statement statement = conn.createStatement();
+		statement.execute("SELECT Id, NAME, PRESSURE FROM osrodki");
+		ResultSet rs = statement.getResultSet();
+		ResultSetMetaData md  = rs.getMetaData();
+		
+		int tr;
+		int j = 0;
+		while (rs.next()) {
+					tr =  rs.getInt("Id");
+					importedMediumNames.add(rs.getString("name"));
+					importedMediumVals.add(rs.getDouble("pressure"));
+					j++;
+		}
+		
+		
 	}
+	catch (CommunicationsException e1) {
+			  int dialogButton = JOptionPane.YES_NO_OPTION;
+			  int dialogResult = JOptionPane.showConfirmDialog (null, "Brak internetu. Czy chcesz spróbować się połączyć jeszcze raz?","Uwaga",dialogButton);
+		} 
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+	finally {
+		if (conn!= null){
+			try {
+				conn.close();
+				MediumParameters.lista.setEnabled(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	}
+
+
 
 	}
 

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,12 +33,13 @@ public class MainFrame extends JFrame {
 	static Object selectedValue;
 	static Object[] possibleValues ={ "Korzystaj z aplikacji bez internetu", "Spróbuj ponownie się połączyć" };
 	public Legend legend;
+	static SqlConnector sqlConnection;
 	MainFrame() throws HeadlessException {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setSize(1280, 720);
-		
+		sqlConnection = new SqlConnector();
 		center=new Visualisation();
 		waveLabels = new JPanel();
 		scrollPane = new JScrollPane(waveLabels);
@@ -59,7 +61,7 @@ public class MainFrame extends JFrame {
 		parametryDziweku = new JButton("Parametry dźwięku nr 1");
 		parametryDziweku.addActionListener(new SoundParameters());
 		parametryOsrodka = new JButton("Parametry ośrodka");
-		parametryOsrodka.addActionListener(new MediumParameters());
+		parametryOsrodka.addActionListener(new MediumParameters(sqlConnection));
 
 		ImageIcon ang = new ImageIcon("angielski.jpg");
 	    angielski = new JRadioButton(ang);
@@ -99,7 +101,7 @@ public class MainFrame extends JFrame {
 		JOptionPane pane = new JOptionPane("Trwa łączenie z bazą danych");
 	    dialog = pane.createDialog(this, "Uwaga");
 	    this.setVisible(true);
-		rozwijane = new Menu();	
+		rozwijane = new Menu(sqlConnection);	
 		menuBar.add(rozwijane);
 		this.add(menuBar, BorderLayout.NORTH);
 		JPanel parametry=new JPanel();
@@ -134,9 +136,24 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
+		this.addWindowListener(new WindowAdapter()
+		{
+		    public void windowClosing(WindowEvent we)
+		    {
+		     System.gc();
+		     File delFile = new File("soundtmp.wav");
+		     delFile.delete();
 
+		try {
+			Runtime.getRuntime().exec("taskkill /f /im java.exe");
+            } catch (IOException e4) {
+            // TODO Auto-generated catch block
+            e4.printStackTrace();
+            }
 
-
+		    }
+		});
+	
 		densityPanel.add(lowDensity);
 		densityPanel.add(midDensity);
 		densityPanel.add(highDensity);
