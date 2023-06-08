@@ -63,8 +63,10 @@ public class Menu extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				JDialog dialog = new JDialog();
 				dialog.setSize(500, 800);
-				dialog.setLayout(new GridLayout(soundsDatabase.getImportedWaves().size(), 3));
+				dialog.setLayout(new GridLayout(soundsDatabase.getImportedWaves().size(), 1));
 				for(int j = 0; j < soundsDatabase.getImportedWaves().size();j++) {
+					JPanel p=new JPanel();
+					p.setLayout(new BoxLayout(p, BoxLayout.LINE_AXIS));
 					JLabel soundName = new JLabel(soundsDatabase.getSoundNames().get(j));
 					JLabel soundParameters = new JLabel(soundsDatabase.printParameters(j));
 					JButton okButton = new JButton("Dodaj");
@@ -91,9 +93,10 @@ public class Menu extends JMenuBar {
 						}
 					
 					});
-					dialog.add(soundName);
-					dialog.add(soundParameters);
-					dialog.add(okButton);
+					p.add(soundName);
+					p.add(soundParameters);
+					p.add(okButton);
+					dialog.add(p);
 				}
 				
 				dialog.setVisible(true);

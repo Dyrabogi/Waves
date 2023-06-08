@@ -42,8 +42,8 @@ Connection conn;
 	}
 	
 	public String printParameters(int i) {
-		String pars = "Amplituda -> " + importedWaves.get(i).getAmp() + ", czestotliwosc -> " 
-				+ importedWaves.get(i).getFreq() + ", faza -> " + importedWaves.get(i).getPhase();
+		String pars = "Amplituda -> " + importedWaves.get(i).getAmp() +"\n"+ ", czestotliwosc -> " 
+				+ importedWaves.get(i).getFreq() +"\n"+ ", faza -> " + importedWaves.get(i).getPhase();
 		return pars;
 	}
 	
