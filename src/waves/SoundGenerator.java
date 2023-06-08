@@ -29,7 +29,7 @@ public class SoundGenerator implements Runnable{
 	 
 	public static void generate(Wave wave, String fileName, boolean saveCheck) throws IOException {
 		final double frequency = wave.getFreq();
-		final double amplitude = 5;//wave.getAmp();
+		final double amplitude = 1;//wave.getAmp();
 		final double seconds = 2.0;
 		final double twoPiF = 2 * Math.PI * frequency;
 		final double sampleRate = 2 * twoPiF;
@@ -96,7 +96,14 @@ public class SoundGenerator implements Runnable{
 
 		for (int sample = 0; sample < buffer.length; sample++) {
 			double time = sample / sampleRate;
+			
 			double funValue =0;
+			double totalAmp = 0;
+			for(double val : amps)   
+				totalAmp += val;
+			for(double val : amps)
+				val /= totalAmp;
+			
 			for(int j = 0; j<waveList.size();j++)
 				funValue += amps.get(j)*Math.sin(twoPiFs.get(j) * time + waveList.get(j).getPhase());
 			float fFunValue = (float) funValue;
@@ -157,6 +164,11 @@ public class SoundGenerator implements Runnable{
 		for (int sample = 0; sample < buffer.length; sample++) {
 			double time = sample / sampleRate;
 			double funValue =0;
+			double totalAmp = 0;
+			for(double val : amps)   
+				totalAmp += val;
+			for(double val : amps)
+				val /= totalAmp;
 			for(int j = 0; j<waveList.size();j++)
 				funValue += amps.get(j)*Math.sin(twoPiFs.get(j) * time + waveList.get(j).getPhase());
 			float fFunValue = (float) funValue;
