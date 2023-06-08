@@ -95,8 +95,8 @@ Connection conn;
 
 	@Override
 	public void run() {
-
-		
+		MediumParameters.lista.setEnabled(false);
+		MainFrame.dialog.setVisible(true);
 		Menu.zListy.setEnabled(false);
 	try {
 		conn = DriverManager.getConnection("jdbc:mysql://db4free.net/wavestemplate", "dyrabog", "Dajmito123");
@@ -118,30 +118,25 @@ Connection conn;
 		
 	}
 	catch (CommunicationsException e1) {
-			  int dialogButton = JOptionPane.YES_NO_OPTION;
-			  int dialogResult = JOptionPane.showConfirmDialog (null, "Brak internetu. Czy chcesz spróbować się połączyć jeszcze raz?","Uwaga",dialogButton);
-			  if(dialogResult == JOptionPane.YES_OPTION){
-			    MainFrame.rozwijane.exec.execute(MainFrame.rozwijane.soundsDatabase);
-			  }
+		JOptionPane.showMessageDialog(null, "Brak internetu. Niektóre funkcje są niedostępne.", "UWAGA", JOptionPane.ERROR_MESSAGE);
 		} 
 	catch (SQLException e) {
 		e.printStackTrace();
 	}
 	
 	finally {
-		MainFrame.dialog.setVisible(true);
+		
 		if (conn!= null){
 			try {
 				conn.close();
 				Menu.zListy.setEnabled(true);
-				MainFrame.dialog.setVisible(false);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	MediumParameters.lista.setEnabled(false);
+	
 	try {
 		conn = DriverManager.getConnection("jdbc:mysql://db4free.net/wavestemplate", "dyrabog", "Dajmito123");
 		Statement statement = conn.createStatement();
@@ -159,14 +154,13 @@ Connection conn;
 		}
 		
 		
+	}catch (CommunicationsException e1) {
+	
 	}
-	catch (CommunicationsException e1) {
-			  int dialogButton = JOptionPane.YES_NO_OPTION;
-			  int dialogResult = JOptionPane.showConfirmDialog (null, "Brak internetu. Czy chcesz spróbować się połączyć jeszcze raz?","Uwaga",dialogButton);
-		} 
 	catch (SQLException e) {
 		e.printStackTrace();
 	}
+	
 	
 	finally {
 		if (conn!= null){
@@ -179,8 +173,9 @@ Connection conn;
 		}
 	}
 	
-	
+	MainFrame.dialog.setVisible(false);
 	}
+	
 
 
 
