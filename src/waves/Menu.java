@@ -28,12 +28,13 @@ public class Menu extends JMenuBar {
 	static ExecutorService exec;
 	static SoundGenerator sound;
 
-	Menu() {
+	Menu(SqlConnector sounds) {
 		super();
 		
 		rand = new Random();
 		dzwiek = new JMenu("Dodaj źródło dźwięku");
 		this.add(dzwiek);
+		this.soundsDatabase = sounds;
 		losowo = new JMenuItem("Losowo");
 		losowo.addActionListener(new ActionListener() {
 			@Override
@@ -53,7 +54,6 @@ public class Menu extends JMenuBar {
 		});
 
 		zListy = new JMenuItem("Z listy");
-		soundsDatabase = new SqlConnector();
 		exec=Executors.newFixedThreadPool(2);
 		exec.execute(soundsDatabase);
 
@@ -204,16 +204,8 @@ public class Menu extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sound.czynny=true;
-//				for (Wave wave : MainFrame.waves) {
-//					try {
-//						sound.generate(wave, "wave-freq-" + wave.getFreq() + "-sound",false);
-//						exec.execute(sound);
-//					} catch (IOException e1) {
-//						e1.printStackTrace();
-//					}
-//				}
 				try {
-					sound.saveSounds(MainFrame.waves);
+					sound.playSounds(MainFrame.waves);
 					exec.execute(sound);
 				} catch (IOException e1) {
 					e1.printStackTrace();

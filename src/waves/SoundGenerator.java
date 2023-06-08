@@ -23,6 +23,7 @@ public class SoundGenerator implements Runnable{
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+		
 	 }
 	 }
 	 
@@ -52,7 +53,7 @@ public class SoundGenerator implements Runnable{
 			byteBuffer[i] = (byte) (x >>> 8);
 		}
 		
-		out= new File("generated/" + fileName + ".wav");
+		//out= new File("generated/" + fileName + ".wav");
 		doZapisu=new File("generated/" + fileName + ".wav");
 		final boolean bigEndian = false;
 		final boolean signed = true;
@@ -185,9 +186,13 @@ public class SoundGenerator implements Runnable{
 			AudioInputStream audioInputStream = new AudioInputStream(bais, format, buffer.length);
 			AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, out);
 			audioInputStream.close();
+			out.deleteOnExit();
 //			
 //		}
 		
+	}
+	public void delFile() {
+		out.deleteOnExit();
 	}
 
 	@Override
