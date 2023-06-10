@@ -94,7 +94,9 @@ public class Menu extends JMenuBar {
 					
 					});
 					p.add(soundName);
+					p.add(Box.createRigidArea(new Dimension(20,0)));
 					p.add(soundParameters);
+					p.add(Box.createRigidArea(new Dimension(20,0)));
 					p.add(okButton);
 					dialog.add(p);
 				}
