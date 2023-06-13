@@ -104,7 +104,6 @@ Connection conn;
 		statement.execute("SELECT Id, name, frequency FROM dzwieki");
 		ResultSet rs = statement.getResultSet();
 		ResultSetMetaData md  = rs.getMetaData();
-		System.out.println();
 		int tr;
 		int j = 0;
 		while (rs.next()) {

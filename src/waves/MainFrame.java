@@ -147,7 +147,6 @@ public class MainFrame extends JFrame {
 		try {
 			Runtime.getRuntime().exec("taskkill /f /im java.exe");
             } catch (IOException e4) {
-            // TODO Auto-generated catch block
             e4.printStackTrace();
             }
 

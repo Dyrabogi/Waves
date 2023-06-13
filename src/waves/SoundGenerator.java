@@ -8,13 +8,15 @@ import java.util.Collections;
 import java.util.List;
 import java.io.*;
 import javax.sound.sampled.*;
+import javax.swing.JFileChooser;
+
+import java.awt.*;
 
 public class SoundGenerator implements Runnable{
 	public Boolean czynny=true;
 	public static Clip clip;
 	static AudioInputStream stream;
 	public static File out, doZapisu;
-//	static ArrayList<String> fileNames = new ArrayList();
 	static ArrayList<Wave> wavesList = new ArrayList();
 	 SoundGenerator(){
 		 for (Wave wave : MainFrame.waves) {
@@ -29,13 +31,10 @@ public class SoundGenerator implements Runnable{
 	 
 	public static void generate(Wave wave, String fileName, boolean saveCheck) throws IOException {
 		final double frequency = wave.getFreq();
-		final double amplitude = 1;//wave.getAmp();
+		final double amplitude = 1;
 		final double seconds = 2.0;
 		final double twoPiF = 2 * Math.PI * frequency;
 		final double sampleRate = 2 * twoPiF;
-
-		// kod zapożyczony z https://stackoverflow.com/
-
 		float[] buffer = new float[(int) (seconds * sampleRate)];
 
 		for (int sample = 0; sample < buffer.length; sample++) {
@@ -52,8 +51,6 @@ public class SoundGenerator implements Runnable{
 			byteBuffer[i++] = (byte) x;
 			byteBuffer[i] = (byte) (x >>> 8);
 		}
-		
-		//out= new File("generated/" + fileName + ".wav");
 		doZapisu=new File("generated/" + fileName + ".wav");
 		final boolean bigEndian = false;
 		final boolean signed = true;
@@ -119,22 +116,28 @@ public class SoundGenerator implements Runnable{
 			byteBuffer[i++] = (byte) x;
 			byteBuffer[i] = (byte) (x >>> 8);
 		}
-		
-		doZapisu= new File("generated/" + "combinedFuncof" +waveList.size()+ ".wav");
-//		doZapisu=new File("generated/" + fileName + ".wav");
+		JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Wybierz plik");
+        int result = chooser.showDialog(null, "Wybierz");
+        if (JFileChooser.APPROVE_OPTION == result){
+            System.out.println("Wybrano plik: " +
+                    chooser.getSelectedFile());
+        }else {
+            System.out.println("Nie wybrano pliku");
+        }
+
+		doZapisu= new File(chooser.getSelectedFile().getPath()+".wav");
 		final boolean bigEndian = false;
 		final boolean signed = true;
-
 		final int bits = 16;
 		final int channels = 1;
-//		if(saveCheck) {
 			AudioFormat format = new AudioFormat((float) sampleRate, bits, channels, signed, bigEndian);
 			ByteArrayInputStream bais = new ByteArrayInputStream(byteBuffer);
 			AudioInputStream audioInputStream = new AudioInputStream(bais, format, buffer.length);
 			AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, doZapisu);
 			audioInputStream.close();
-//			
-//		}
+		
+	
 		
 	}
 	
@@ -156,9 +159,6 @@ public class SoundGenerator implements Runnable{
 			twoPiFs.add(freq*Math.PI*2);
 		}
 		final double sampleRate = 3 * Collections.max(twoPiFs);
-
-		// kod zapożyczony z https://stackoverflow.com/
-
 		float[] buffer = new float[(int) (seconds * sampleRate)];
 
 		for (int sample = 0; sample < buffer.length; sample++) {

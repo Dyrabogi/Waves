@@ -38,7 +38,6 @@ public class WaveTextSynchronizer implements DocumentListener {
 			}
 
 		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
 
 			if (whatToChange == "amplituda") {
 				waves.get(comboBox.getSelectedIndex()).setAmp(0);

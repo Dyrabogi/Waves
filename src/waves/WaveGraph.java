@@ -27,21 +27,21 @@ public class WaveGraph extends JPanel {
 		XYSeries series = new XYSeries(" f(x) ");
 		
 		if (MainFrame.polski.isSelected()) {
-			chart = ChartFactory.createXYLineChart("Wykres fali wynikowej", // Tytul
-					"t (s)", // opisy osi
-					" ", dataset, // Dane
-					PlotOrientation.VERTICAL, // Orjentacja wykresu
-					true, // legenda
-					true, // tooltips
+			chart = ChartFactory.createXYLineChart("Wykres fali wynikowej",
+					"t (s)", 
+					" ", dataset,
+					PlotOrientation.VERTICAL, 
+					true, 
+					true, 
 					false);
 		}
 		if (MainFrame.angielski.isSelected()) {
-			chart = ChartFactory.createXYLineChart("Wave graph", // Tytul
-					"t (s)", // opisy osi
-					" ", dataset, // Dane
-					PlotOrientation.VERTICAL, // Orjentacja wykresu
-					true, // legenda
-					true, // tooltips
+			chart = ChartFactory.createXYLineChart("Wave graph",
+					"t (s)", 
+					" ", dataset,
+					PlotOrientation.VERTICAL, 
+					true, 
+					true, 
 					false);
 		}
 

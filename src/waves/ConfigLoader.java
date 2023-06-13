@@ -34,8 +34,6 @@ public class ConfigLoader {
             chooser.setDialogTitle("Wybierz plik");
             int result = chooser.showDialog(null, "Wybierz");
             File inputFile = new File(chooser.getSelectedFile().toURI());
-            
-			//Path path = Paths.get("config.json");
             Path path=Paths.get(inputFile.toURI());
 			Gson g = new Gson();
 			String raw = Files.readString(path);
