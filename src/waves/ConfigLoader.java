@@ -32,17 +32,24 @@ public class ConfigLoader {
 		try {
 			JFileChooser chooser = new JFileChooser();
             chooser.setDialogTitle("Wybierz plik");
-            int result = chooser.showDialog(null, "Wybierz");
+            int result = chooser.showDialog(null, "Wybierz");   
+            if (JFileChooser.APPROVE_OPTION == result){
             File inputFile = new File(chooser.getSelectedFile().toURI());
             Path path=Paths.get(inputFile.toURI());
 			Gson g = new Gson();
 			String raw = Files.readString(path);
 			Config config = g.fromJson(raw, Config.class);
 			return config.getWavesList();
+            }
+            else {
+            	ArrayList<Wave> defaultConfig = new ArrayList<Wave>();
+    			return defaultConfig;
+            }
+            	
+           
 		} catch (IOException | JsonSyntaxException e) {
 
 			ArrayList<Wave> defaultConfig = new ArrayList<Wave>();
-			defaultConfig.add(new Wave(0, 0, 0));
 			return defaultConfig;
 		}
 	}

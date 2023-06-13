@@ -70,7 +70,8 @@ public class SoundGenerator implements Runnable{
 	
 	public static void saveSounds(ArrayList<Wave> waveList) throws IOException {
 		final ArrayList<Double> freqs = new ArrayList();
-		for(Wave wave : waveList){
+		if(waveList.size()!=0) {
+			for(Wave wave : waveList){
 			freqs.add(wave.getFreq());
 		}
 		
@@ -120,13 +121,8 @@ public class SoundGenerator implements Runnable{
         chooser.setDialogTitle("Wybierz plik");
         int result = chooser.showDialog(null, "Wybierz");
         if (JFileChooser.APPROVE_OPTION == result){
-            System.out.println("Wybrano plik: " +
-                    chooser.getSelectedFile());
-        }else {
-            System.out.println("Nie wybrano pliku");
-        }
-
-		doZapisu= new File(chooser.getSelectedFile().getPath()+".wav");
+        System.out.println("Wybrano plik: " + chooser.getSelectedFile());
+        doZapisu= new File(chooser.getSelectedFile().getPath()+".wav");
 		final boolean bigEndian = false;
 		final boolean signed = true;
 		final int bits = 16;
@@ -137,12 +133,20 @@ public class SoundGenerator implements Runnable{
 			AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, doZapisu);
 			audioInputStream.close();
 		
+        }else {
+            System.out.println("Nie wybrano pliku");
+        }
+
+	
+		}
+		
 	
 		
 	}
 	
 	public static void playSounds(ArrayList<Wave> waveList) throws IOException {
-		final ArrayList<Double> freqs = new ArrayList();
+		if(waveList.size()!=0) {
+			final ArrayList<Double> freqs = new ArrayList();
 		for(Wave wave : waveList){
 			freqs.add(wave.getFreq());
 		}
@@ -186,21 +190,19 @@ public class SoundGenerator implements Runnable{
 		}
 		
 		out= new File("soundtmp"+ ".wav");
-//		doZapisu=new File("generated/" + fileName + ".wav");
 		final boolean bigEndian = false;
 		final boolean signed = true;
 
 		final int bits = 16;
 		final int channels = 1;
-//		if(saveCheck) {
 			AudioFormat format = new AudioFormat((float) sampleRate, bits, channels, signed, bigEndian);
 			ByteArrayInputStream bais = new ByteArrayInputStream(byteBuffer);
 			AudioInputStream audioInputStream = new AudioInputStream(bais, format, buffer.length);
 			AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, out);
 			audioInputStream.close();
 			out.deleteOnExit();
-//			
-//		}
+		}
+		
 		
 	}
 	public void delFile() {

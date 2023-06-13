@@ -27,10 +27,15 @@ Speaker(){
 	         glosnik = ImageIO.read(inputFile);
 	     } catch(IOException ex) {
 	         System.out.println(ex.getMessage());
-	     }
+	     } 
 	    xPos=100;
 	    yPos=300;
 	    speed=100;
+	     if(MainFrame.center.speakers.size()!=0) {
+	    	 xPos=MainFrame.center.speakers.get(MainFrame.center.speakers.size()-1).getxPos()-30;
+	    	 yPos=MainFrame.center.speakers.get(MainFrame.center.speakers.size()-1).getyPos()-30;
+	     }
+	   
 	    
 	    xWidth=xPos+glosnik.getWidth();
 	    yWidth=yPos+glosnik.getHeight();
